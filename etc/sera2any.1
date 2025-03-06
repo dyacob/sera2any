@@ -1,0 +1,164 @@
+.\" @(#)sera2any.1 2.3.1 96/20/01
+.\" GNU Copyleft 1996 Admas Concepts
+.TH sera2any 1 "11 Tr 1988 (20 Jan 1996)" "Admas Concepts"
+.SH NAME
+.ce
+.B sera2any \c
+\- converts SERA Fidel into a specified output system
+.SH SYNOPSIS
+.B sera2any
+[
+-\c
+.ul 
+c
+]
+[
+-\c
+.ul 
+h
+]
+[
+-\c
+.ul 
+l
+]
+[
+-\c
+.ul 
+o
+.I system
+]
+[
+-\c
+.ul 
+q
+]
+[
+-\c
+.ul 
+rtf
+]
+[
+-\c
+.ul 
+s
+]
+[
+-\c
+.ul 
+stats
+.I system
+]
+[
+-\c
+.ul 
+v
+] <
+.I infile ...
+>
+.br
+.SH DESCRIPTION
+\f4sera2any\fP is a utility for conversion of SERA text into a secondary
+output system.  \fBsera2any\fP works with the \fBlibeth\fP parsing engine
+written in AT&T lex and GNU flex.  A variety of command line options are
+offered to set SERA defaults when they are not defined in the document
+body.  \fBsera2any\fP output is written to stdout.  Current output
+encoding option are for Unicode, Japanese Industrial Standard (JIS),
+and the Japanese Unix Network (JUNET).  RTF and limited TeX and LaTeX
+support is also offered.
+.SH OPTIONS
+.TP
+.B \-\^c
+Map ASCII colon, ":",  to Ge'ez colon (-:) and \fBnot\fP to the
+default Ge'ez wordspace (:). Ge'ez word space may now
+.ul
+only
+be given by `: .
+.TP
+.B \-\^fromdos
+The input file is DOS text, strip out DOS ^M end of line characters.  Output
+will be in Unix text.  This option impacts parsing speed and is only available
+when \fBsera2any\fP is compiled for DOS support.
+.TP
+.B \-\^h
+Echoes help list to stderr and exits.
+.TP
+.B \-\^html
+Forces HTML conversion, leaving text between \fB<\fP and \fB>\fP or \fB&\fP and \fB;\fP as Latin.
+
+.TP
+.B \-\^l LL(L)
+Set starting language to that specified by LL or LLL where LL(L)
+is an ISO-639 two or three letter identifier.  Supported languages
+are: am(h), ge(z), la(t), & ti(r).
+.TP
+.B \-\^o system
+Specify output of type \fBsystem\fP. \fISystem\fP defaults as JUNET or may 
+be one of \fBsera\fP, \fBalxet\fP, \fBagafari\fP, \fBfeedel\fP, \fBjis\fP, 
+\fBjava\fP, \fBuni\fPcode, or \fBwashra\fP.  Appending \fI-html\fP to the 
+\fBsystem\fP forces the scanner to leave as Latin all text between < and >.
+.sp
+Example:
+.br
+.B -o uni    
+[Unicode Output]
+.br
+.B -o jis-html 
+[JIS Output With HTML Filtering]
+.TP
+.B \-\^q
+Map ASCII question mark, "?", to Ge'ez 3-Dot question mark (`?) and \fBnot\fP
+to the default Ge'ez stylized question mark (?).  The use of ? and `? in SERA 
+text are now reversed.
+.TP
+.B \-\^rtf
+Output in Rich Text Format.  Supported for Agafari, ALXEthiopian, Feedel, 
+and Washra fonts currently.
+.TP
+.B \-\^s
+Map ASCII space, " ", to Ge'ez wordspace (:).
+.TP
+.B \-\^stats system
+Provides a Fidel table with statistical output of character
+occurrences into the files "fidel.stats" and sorted statistics in 
+"fidel2.stats".  \fISystem\fP defaults as sera or may be one of 
+\fBjun\fPet, \fBjis\fP, \fBalxet\fP, \fBagafari\fP, \fBfeedel\fP, 
+\fBuni\fPcode, or \fBwashra\fP.  Appending \fI-html\fP to the \fBsystem\fP
+name will format the statistics output for HTML. 
+.sp
+Example:
+.B -stats jis-html
+.TP
+.B \-\^todos
+The input file is Unix text, insert DOS ^M end of line characters.  Output
+will be in DOS text.  This option impacts parsing speed and is only available 
+when \fBsera2any\fP is compiled for DOS support.
+.TP
+.B \-\^v
+Echo version number and exit.
+
+.SH AVAILABILITY
+.LP
+By ftp:  https://github.com/dyacob/sera2any/
+
+.SH Text References
+.LP
+.ul
+The System For Ethiopic Representation In ASCII,
+.br
+https://www.academia.edu/87262743/The_System_for_Ethiopic_Representation_in_ASCII
+.ul
+The System User's Guide
+.br
+https://www.academia.edu/87262938/The_SERA_Users_Guide
+.br
+.ul
+The SERA FAQ
+.br
+http://www.abyssiniagateway.net/fidel/sera-faq.html
+
+.SH SEE ALSO
+sera(1), pssera(1)
+
+.SH BUGS
+None reported, but lurking...

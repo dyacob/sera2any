@@ -1,0 +1,140 @@
+
+
+The Ethiopic Library in C Manifest
+==================================
+
+
+This is the manifest for LibEth v0.1b, the "Dila" release.  
+LibEth provides C programmers with a library of routines for
+Fidel I/O modeled after ANSI C standard routines for files 
+and strings.  Additional routines are available, or proposed,
+for the library for cultural localization for conversion between
+number and calendar systems.  The package is Iintended to be
+a utility for I18N programmers providing Fidel and Ethio-
+Eritrean language support in their software.  
+
+LibEth supports SERA I/O under Unicode, and output only for Junet, 
+and JIS character coding systems.  The core of the LibEth package 
+is a character stream scanner written in AT&T Lex.  The scanner
+serves as a runtime layer between the I/O functions and the
+file system.  This layer, invisible to the programmer, allows
+the programmer to work with Fidel, as Fidel, tokenized in the
+addressing scheme of choice.
+
+
+Differences From The Standard C Model:
+-------------------------------------
+
+LibEth routines look, perform, and return values like standard
+c routines will.  The primary difference is that the routine
+names are prefixed with ``fidel'' and require that an extra 
+argument be passed at the end of the argument list.  The
+``seraflags'' 
+
+A second difference is that the fidel_ routines expect to be
+passed string pointers for the ``target'' of the action.  This
+is done to insure a successful operation by providing an automated 
+bounds checking which becomes an issue of greater concern for mixed
+byte width output.
+
+This code segment demonstrates reading of a file in one coding
+or encoding system -such as SERA, and writing out in another
+-such as Unicode.  Note that fidel_fgets will allocate the
+memory needed to hold the actual characters read.
+
+
+SERAFlags seraFlags;
+FCHAR* mystring;
+FILE* inptr = stdin;
+FILE* outptr = stdout;
+   :
+   :
+  seraFlags->in = sera;
+  seraFlags->out = uni;
+   :
+   :
+  while (!feof(inptr))           
+   {
+     fidel_fgets (&mystring, 80, inptr, seraFlags);
+     fidel_fputs (mystring, outptr, seraflags);
+     free (mystring);
+   }
+   :
+   :
+
+LIBETH STATUS
+=============
+
+LibEth-0.1b is NOT a stable release of the LibEth package.
+File and string I/O commands HAVE been tested and operate
+normally in normal conditions.  Problems may be lurking 
+when multiple file and string pointers are used simultaneously
+-this is a lex "lookahead" token issue.
+
+ftoi, arab2eth, fidel_ungetc, and kb_hit may also not be
+reliable at this stage.
+
+
+TO DO FOR 0.1 
+=============
+
+To bring The Dila Motor to a production release state it
+is required that :
+
+1) Make sure the scanner does not read beyond EOF when
+   file pointers change  -make sure the lex buffer gets
+   flushed!!
+
+2) Make sure the number converters are fully functional,
+   write code for working with long ints.  
+
+3) Test (for the first time) if the kbhit routine works,
+   then fix it.
+
+4) Test on more versions of Lex. Versions of AT&T Lex can
+   vary widely in their compilation outcomes :(
+
+5) Test on more versions of C.
+
+
+TO DO FOR 0.2 
+=============
+
+Version 0.2, The Shashemene Motor, is targeted to feature :
+
+1) Full support for Flex. A flex version nukes any and all
+   problems with the lex motor. But the world is not perfect
+   and lex is still the LCD.
+
+2) Initial version of C date functions for the Ethiopian
+   calendar system.
+
+3) A default behaviour when the seraflags argument is set
+   to NULL.
+
+
+TO DO FOR 0.3 
+=============
+
+Version 0.3, The Nazret Engine, is targeted to feature :
+
+
+1) LibEth handles Unicode text streams.
+
+2) Time permitting, LibEth is now a shared library.
+
+3) Additional routines for XIM appear.
+
+4) Man pages are finished, or maybe started.
+
+  :
+  :
+  :
+  :
+
+TO DO FOR 1.0 
+=============
+
+Version 1.0, The Adwa Driver, is the ultimate goal.  Every routine
+is robust, every routine has a man page. Any predictions now possible. 
+

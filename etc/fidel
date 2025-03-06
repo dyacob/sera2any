@@ -1,0 +1,49 @@
+<html>
+<body>
+<head>
+<title>
+  \The Extended Unicode Fidel\
+</title>
+</head>
+
+<center>
+<table border>
+<caption>
+  <h2>yeyunikod fidel<br>
+  <font size=+3>(\The Unicode Fidel)\</font> 
+  </h2>
+</caption>
+<tr><th>      <th>0 <th> 1<th> 2<th> 3<th> 4<th> 5<th> 6<th> 7<th> 8<th> 9<th>\A\<th>\B\<th>\C\<th>\D\<th>\E\<th>\ F\
+<tr><th>\0x1200\<td>he<td>hu<td>hi<td>ha<td>hE<td>h<td>ho<td>  <td>le<td>lu<td>li<td>la<td>lE<td>l<td>lo<td>lWa
+<tr><th>\0x1210\<td>He<td>Hu<td>Hi<td>Ha<td>HE<td>H<td>Ho<td>HWa<td>me<td>mu<td>mi<td>ma<td>mE<td>m<td>mo<td>mWa
+<tr><th>\0x1220\<td>`se<td>`su<td>`si<td>`sa<td>`sE<td>`s<td>`so<td>`sWa<td>re<td>ru<td>ri<td>ra<td>rE<td>r<td>ro<td>rWa
+<tr><th>\0x1230\<td>se<td>su<td>si<td>sa<td>sE<td>s<td>so<td>sWa<td>xe<td>xu<td>xi<td>xa<td>xE<td>x<td>xo<td>xWa
+<tr><th>\0x1240\<td>qe<td>qu<td>qi<td>qa<td>qE<td>q<td>qo<td>  <td>qWe<td>  <td>qWi<td>qWa<td>qWE<td>qW<td>  <td>  
+<tr><th>\0x1250\<td>Qe<td>Qu<td>Qi<td>Qa<td>QE<td>Q<td>Qo<td>  <td>QWe<td>  <td>QWi<td>QWa<td>QWE<td>QW<td>  <td>  
+<tr><th>\0x1260\<td>be<td>bu<td>bi<td>ba<td>bE<td>b<td>bo<td>bWa<td>ve<td>vu<td>vi<td>va<td>vE<td>v<td>vo<td>vWa
+<tr><th>\0x1270\<td>te<td>tu<td>ti<td>ta<td>tE<td>t<td>to<td>tWa<td>ce<td>cu<td>ci<td>ca<td>cE<td>c<td>co<td>cWa
+<tr><th>\0x1280\<td>`he<td>`hu<td>`hi<td>`ha<td>`hE<td>`h<td>`ho<td>   <td>hWe<td>  <td>hWi<td>hWa<td>hWE<td>hW<td>  <td>  
+<tr><th>\0x1290\<td>ne<td>nu<td>ni<td>na<td>nE<td>n<td>no<td>nWa<td>Ne<td>Nu<td>Ni<td>Na<td>NE<td>N<td>No<td>NWa
+<tr><th>\0x12A0\<td>e<td>u<td>i<td>A<td>E<td>I<td>o<td>e3<td>ke<td>ku<td>ki<td>ka<td>kE<td>k<td>ko<td>   
+<tr><th>\0x12B0\<td>kWe<td>  <td>kWi<td>kWa<td>kWE<td>kW<td>  <td>  <td>Ke<td>Ku<td>Ki<td>Ka<td>KE<td>K<td>Ko<td>   
+<tr><th>\0x12C0\<td>KWe<td>  <td>KWi<td>KWa<td>KWE<td>KW<td>  <td>  <td>we<td>wu<td>wi<td>wa<td>wE<td>w<td>wo<td>  
+<tr><th>\0x12D0\<td>`e<td>`u<td>`i<td>`a<td>`E<td>`I<td>`o<td>  <td>ze<td>zu<td>zi<td>za<td>zE<td>z<td>zo<td>zWa
+<tr><th>\0x12E0\<td>Ze<td>Zu<td>Zi<td>Za<td>ZE<td>Z<td>Zo<td>ZWa<td>ye<td>yu<td>yi<td>ya<td>yE<td>y<td>yo<td>yWa
+<tr><th>\0x12F0\<td>de<td>du<td>di<td>da<td>dE<td>d<td>do<td>dWa<td>De<td>Du<td>Di<td>Da<td>DE<td>D<td>Do<td>DWa
+<tr><th>\0x1300\<td>je<td>ju<td>ji<td>ja<td>jE<td>j<td>jo<td>jWa<td>ge<td>gu<td>gi<td>ga<td>gE<td>g<td>go<td>   
+<tr><th>\0x1310\<td>gWe<td>  <td>gWi<td>gWa<td>gWE<td>gW<td>  <td>  <td>Ge<td>Gu<td>Gi<td>Ga<td>GE<td>G<td>Go<td>GWa
+<tr><th>\0x1320\<td>Te<td>Tu<td>Ti<td>Ta<td>TE<td>T<td>To<td>TWa<td>Ce<td>Cu<td>Ci<td>Ca<td>CE<td>C<td>Co<td>CWa
+<tr><th>\0x1330\<td>Pe<td>Pu<td>Pi<td>Pa<td>PE<td>P<td>Po<td>PWa<td>Se<td>Su<td>Si<td>Sa<td>SE<td>S<td>So<td>SWa
+<tr><th>\0x1340\<td>`Se<td>`Su<td>`Si<td>`Sa<td>`SE<td>`S<td>`So<td>  <td>fe<td>fu<td>fi<td>fa<td>fE<td>f<td>fo<td>fWa
+<tr><th>\0x1350\<td>pe<td>pu<td>pi<td>pa<td>pE<td>p<td>po<td>pWa<td>mYa<td>rYa<td>fYa<td>  <td>  <td>  <td>  <td>  
+<tr><th>\0x1360\<td>  <td>:<td>::<td>,<td>;<td>-:<td>:-<td>`?<td>:|:<td>`1<td>`2<td>`3<td>`4<td>`5<td>`6<td>`7
+<tr><th>\0x1370\<td>`8<td>`9<td>`10<td>`20<td>`30<td>`40<td>`50<td>`60<td>`70<td>`80<td>`90<td>`100<td>`10000<td> <td>  <td>  
+<tr><th>\0x1380\<td>`qe<td>`qu<td>`qi<td>`qa<td>`qE<td>`q<td>`qo<td>  <td>mWe<td>bWe<td>GWe<td>fWe<td>pWe<td>  <td>  <td> 
+<tr><th>\0x1390\<td>`ke<td>`ku<td>`ki<td>`ka<td>`kE<td>`k<td>`ko<td>  <td>mWi<td>bWi<td>GWi<td>fWi<td>pWi<td>  <td>  <td>  
+<tr><th>\0x13A0\<td>Xe<td>Xu<td>Xi<td>Xa<td>XE<td>X<td>Xo<td>  <td>mWE<td>bWE<td>GWE<td>fWE<td>pWE<td>  <td>  <td> 
+<tr><th>\0x13B0\<td>`ge<td>`gu<td>`gi<td>`ga<td>`gE<td>`g<td>`go<td>  <td>mW<td>bW<td>GW<td>fW<td>pW<td>  <td>  <td>  
+<tr><th>\0xFDF0\<td>  <td>\~e <td>\~E <td>\~a <td>\~A <td>wWe<td>wWi<td>wWa<td>wWE<td>wW<td>''<td>`!<td>.<td><<<td> >><td>?
+</table>
+</center>
+</body>
+</html>

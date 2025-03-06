@@ -1,0 +1,33 @@
+
+
+DOS I/O For LibEth
+------------------
+
+To provide a higher performance parser, DOS input / output support
+is not the default compilation for the library.  The user may compile
+the library to offer the option for removal or insertion of DOS ^M
+characters at the end-of-line of text files.
+
+To compile for DOS text support, remove the '#' character of line 12
+in the Makefile to appear as:
+
+DEPFLAGS = -DSUPPORT_DOS
+
+Next, since f/lex does does offer conditional compilation you will
+need to edit lines 984 and 1001 of lib-src/get_fchar.l such that:
+
+line #984 before:
+/* 
+line #984 after
+%}
+
+and
+
+line #1001 before:
+*/ 
+line #1001 after
+{%
+
+
+For large files (5,000+ words) a loss in transliteration speed will 
+likely be noticed.

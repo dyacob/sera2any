@@ -1,0 +1,253 @@
+.\" @(#)sera 96/20/01
+.\" GNU Copyleft 1996 Admas Concepts
+.TH SERA 1 "11 Tr 1988 (20 Jan 1996)" "Admas Concepts"
+
+.SH NAME
+.ce
+.BI "SERA --"  " The System For Ethiopic Representation in ASCII"
+
+.SH DESCRIPTION
+.I SERA
+is 
+.B not
+a software in and of itself, it is a transcription system for Fidel
+employed by an ever growing number of software applications.
+.SH OPTIONS
+
+.I SERA
+supports options for the different writing rules of languages that
+use Fidel.  Languages rules can be specified at any time in a body 
+of text by giving their ISO-639 language codes as:
+.TP
+\\~am or \\~amh
+Set Amharic writing rules.  This setting affects the transcription of
+``\fBa\fP'' to be read as the 1st and not the 4th vowel. Amharic phonetic
+rules will be used for phonetic filters and transliterators.
+.TP
+\\~ti or \\~tir
+The default.  Sets Tigrigna writing rules.  These are the regular Fidel 
+writing rules used by most languages. Tigrigna phonetic rules will be used
+for phonetic filters and transliterators.
+.TP
+\\~gz or \\~gez
+Ge'ez phonetic rules will be used for phonetic filters and transliterators.
+.SH " "
+The following options can be used at any time in a body of text to change 
+the rules for the associated punctuation usages:
+.TP
+\\~`: 
+ Use : for Ge'ez Wordspace `: (The Default)
+.TP
+\\~-:
+ Use : for Ge'ez Colon -:
+.TP
+\\~?
+ Use  ? for Ge'ez Stylized Question Mark
+ Use `? for Ge'ez 3-Dot Question Mark (The Default)
+.TP
+\\~`|
+ Use  ? for Ge'ez 3-Dot Question Mark
+ Use `? for Ge'ez Stylized Question Mark
+
+.bp
+.SH The SERA Fidel
+
+      1     2     3     4     5     6     7       8
+     g`Iz  ka`Ib sals  rab`I hams  sads  sab`I  diqala -->
+      8    (9)   10     11    12   13
+
+  1   he    hu    hi    ha    hE    h     ho
+  2   le    lu    li    la    lE    l     lo    lW\\lWa
+  3   He    Hu    Hi    Ha    HE    H     Ho    HW\\HWa
+  4   me    mu    mi    ma    mE    m     mo    mW\\mWa
+  5  `se   `su   `si   `sa   `sE   `s    `so   `sW\\`sWa
+  6   re    ru    ri    ra    rE    r     ro    rW\\rWa
+  7   se    su    si    sa    sE    s     so    sW\\sWa
+  8   xe    xu    xi    xa    xE    x     xo    xW\\xWa
+  9   qe    qu    qi    qa    qE    q     qo    
+     qWe  (qWu)  qWi   qWa    qWE   qW
+ 10  `qe   `qu   `qi   `qa   `qE   `q    `qo      
+ 11   Qe    Qu    Qi    Qa    QE    Q     Qo    
+     QWe  (QWu)  QWi   QWa   QWE    QW
+ 12   be    bu    bi    ba    bE    b     bo    bW\\bWa
+ 13   ve    vu    vi    va    vE    v     vo    vW\\vWa
+ 14   te    tu    ti    ta    tE    t     to    tW\\tWa
+ 15   ce    cu    ci    ca    cE    c     co    cW\\cWa
+ 16  `he   `hu   `hi   `ha   `hE   `h    `ho    
+     hWe   hWu   hWi   hWa   hWE    hW
+ 17   ne    nu    ni    na    nE    n     no    nW\\nWa
+ 18   Ne    Nu    Ni    Na    NE    N     No    NW\\NWa
+ 19    e/\fBa*\fP  u     i     a     E    I      o     e3
+ 20   ke    ku    ki    ka    kE    k     ko    
+     kWe  (kWu)  kWi   kWa   kWE   kW
+ 21  `ke   `ku   `ki   `ka   `kE   `k    `ko      
+ 22   Ke    Ku    Ki    Ka    KE    K     Ko    
+     KWe  (KWu)  KWi   KWa   KWE    KW
+ 23   Xe    Xu    Xi    Xa    XE    X     Xo     
+ 24   we    wu    wi    wa    wE    w     wo
+ 25   `e    `u    `i    `a    `E   `I     `o
+ 26   ze    zu    zi    za    zE    z     zo    zW\\zWa
+ 27   Ze    Zu    Zi    Za    ZE    Z     Zo    ZW\\ZWa
+ 28   ye    yu    yi    ya    yE    y     yo    yW\\yWa
+ 29   de    du    di    da    dE    d     do    dW\\dWa
+ 30   De    Du    Di    Da    DE    D     Do    DW\\DWa
+ 31   je    ju    ji    ja    jE    j     jo    jW\\jWa
+ 32   ge    gu    gi    ga    gE    g     go    
+     gWe  (gWu)  gWi   gWa   gWE   gW
+ 33  `ge   `gu   `gi   `ga   `gE   `g    `go      
+ 34   Ge    Gu    Gi    Ga    GE    G     Go    
+     GWe  (GWu)  GWi   GWa   GWE   GW
+ 35   Te    Tu    Ti    Ta    TE    T     To    TW\\TWa
+ 36   Ce    Cu    Ci    Ca    CE    C     Co    CW\\CWa
+ 37   Pe    Pu    Pi    Pa    PE    P     Po    PW\\PWa
+ 38   Se    Su    Si    Sa    SE    S     So    SW\\SWa
+ 39  `Se   `Su   `Si   `Sa   `SE   `S    `So
+ 40   fe    fu    fi    fa    fE    f     fo    fW\\fWa  
+ 41   pe    pu    pi    pa    pE    p     po    pW\\pWa
+
+
+.B * ``a'' 
+is 
+.I only
+valid for (e) in transcription for Amharic.
+
+.SH Equivalents
+
+Consonant Series   Special Series     Lone Vowels
+
+   B   =   b         s2   =   `s       O   =   o
+   F   =   f         h2   =   `h      `O   =  `o
+   J   =   j         S2   =   `S       U   =   u
+   L   =   l         e2   =   `e      `U   =  `u
+   M   =   m         q2   =   `q       A   =   a
+   R   =   r         g2   =   `g      `A   =  `a
+   V   =   v
+   Y   =   y
+.TP
+W   = 
+when not preceded by a consonant as defined above; it 
+is left to the specific application to interpret.
+-- It may be ignored or given an additional phonetic
+character if available.
+
+
+.SH Punctuation and Numbers in Fidel Text Zones
+
+  ,    Ge'ez Comma
+  ;    Ge'ez Semicolon 
+ `:    Ge'ez Wordspace
+ :-    Ge'ez Preface Colon
+ -:    Ge'ez Colon
+  :    Ge'ez Wordspace \fBor\fP Ge'ez Colon 
+       Depending on Default Settings
+ ::    Ge'ez Full Stop
+ <<    Ge'ez Left Quote
+ >>    Ge'ez Right Quote
+ :|:   Ge'ez Paragraph Terminator
+ `!    Ge'ez Sarcasm Mark
+ `|    Ge'ez 3-Dot Question Mark 
+ `?    Ge'ez 3-Dot Question Mark \fBor\fP Ge'ez Stylized 
+       Question Mark Depending on Default Settings
+  ?    Ge'ez Stylized Question Mark \fBor\fP Ge'ez 3-Dot
+       Question Mark Depending on Default Settings
+  .    Ge'ez Stylized Dot
+
+ \\\\    Latin BackSlash
+ \\,    Latin Comma
+ \\;    Latin Semicolon
+ \\:    Latin Colon
+ \\.    Latin Full Stop
+ \\'    Latin Apostrophe
+ \\`    Latin Backquote
+
+ '     is always ignored 
+ `     is ignored unless a special vowel, consonant, or 
+       punctuation follows
+          -- s,S,h,g,q,e,u\\U,i,a\\A,E,I,o\\O,?
+
+ ''    Geminates character on left
+ `'    Voiced Sads Vowel 
+       ('' and `' are for phonetic use and ignored in most 
+        software)
+
+  0...9  Arabic Numerals
+ `1..`9  Ethiopic Numerals
+
+
+.SH Punctuation and Numbers in Latin (or other) Text Zones
+
+ \\,    Ge'ez Comma
+ \\;    Ge'ez Semicolon 
+ \\`:   Ge'ez Wordspace
+ \\:-   Ge'ez Preface Colon     
+ \\-:   Ge'ez Colon     
+ \\:    Ge'ez Wordspace \fBor\fP Ge'ez Colon 
+        Depending on Default Settings
+ \\::   Ge'ez Full Stop
+ \\<<   Ge'ez Left Quote
+ \\>>   Ge'ez Right Quote 
+ \\:|:  Ge'ez Paragraph Terminator 
+ \\`!   Ge'ez Sarcasm Mark
+ \\`|   Ge'ez 3-Dot Question Mark 
+ \\`?   Ge'ez 3-Dot Question Mark \fBor\fP Ge'ez Stylized 
+        Question Mark Depending on Default Settings
+ \\?    Ge'ez Stylized Question Mark \fBor\fP Ge'ez 3-Dot
+        Question Mark Depending on Default Settings
+ \\.    Ge'ez Stylized Dot
+
+ \\\\    Latin Backslash
+
+   0..9   Arabic Numerals
+ \\`1..`9  Ethiopic Numerals
+
+
+.SH Special Escapes
+.TP
+\^\\
+Change to next language of the defined primary-secondary pair.
+
+.TP 
+\^\\:;'. 
+When followed by a punctuation list of one or more items
+the list is transcribed in the next language of the defined
+primary-secondary pair. 
+
+.TP 
+\^\\!
+The "Verbatim Mode Toggle".  The switch turns the mode on-off
+treating all text as one script until the closing \\! .
+This allows extended use of \\ and \\~ without the
+requirement for \\ and \\~ but at the cost of using
+only one script within the text region.  
+
+
+.TP 
+\^\\~
+If followed by a defined character, the appropriate event occurs.
+It is left to software houses to recognize each others' graphic
+escape sequences and provide filters.  \\~ is recommended as a means 
+to denote in ASCII the nonstandard characters and glyphs of a font
+set.
+
+.TP 
+\^\\~xy  
+Change to language or script ``xy''.  ``xy'' MUST be followed by " ". 
+
+.TP 
+\^\\~x   
+Ignored if "x" is a " " or undefined in an application.
+A " " following "x" is the required terminator.
+
+
+.TP
+\^ < > & ;   
+Contents between remain in Latin script in HTML documents.
+
+.PP
+.SH SEE ALSO
+ mule(1), sera2any(1), sera2latex(1), fbanner(1), ecal(1)
+
+.SH MAINTAINERS
+.PP
+ dan'El ya`Iqob mekonn yacob\fB@\fPpadis.gn.apc.org
+ yTna biniyam frdywek ybf2u\fB@\fPcurry.edschool.virginia.edu

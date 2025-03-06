@@ -1,0 +1,849 @@
+/*  
+**  This is fidel.h for libeth v0.10
+**
+**  Unicode, Junet, and JIS are supported in this release for IO mapping into and
+**  out of the internal modulo class structure.  Additional coding systems may be
+**  supported by this package if maps are made to and from the FidelName table below.
+**  Characters without mappings in other systems should be given NIL for their 
+**  address, or the address of the next nearest phonetic value in Fidel.
+**
+*/
+
+#ifndef FIDEL_MAP
+#define FIDEL_MAP  1
+
+char* FidelName[UNITOTAL] = 
+       {
+          "he", "hu", "hi", "ha", "hE", "h", "ho",  "--",
+          "le", "lu", "li", "la", "lE", "l", "lo", "lWa",
+          "He", "Hu", "Hi", "Ha", "HE", "H", "Ho", "HWa",
+          "me", "mu", "mi", "ma", "mE", "m", "mo", "mWa",
+         "`se","`su","`si","`sa","`sE","`s","`so","`sWa",
+          "re", "ru", "ri", "ra", "rE", "r", "ro", "rWa",
+          "se", "su", "si", "sa", "sE", "s", "so", "sWa",
+          "xe", "xu", "xi", "xa", "xE", "x", "xo", "xWa",
+          "qe", "qu", "qi", "qa", "qE", "q", "qo",  "--",
+         "qWe","qWu","qWi","qWa","qWE","qW", "--",  "--",
+          "Qe", "Qu", "Qi", "Qa", "QE", "Q", "Qo",  "--",
+         "QWe","QWu","QWi", "QWa","QWE","QW", "--", "--",
+          "be", "bu", "bi", "ba", "bE", "b", "bo", "bWa",
+          "ve", "vu", "vi", "va", "vE", "v", "vo", "vWa",
+          "te", "tu", "ti", "ta", "tE", "t", "to", "tWa",
+          "ce", "cu", "ci", "ca", "cE", "c", "co", "cWa",
+         "`he","`hu","`hi","`ha","`hE","`h","`ho",  "--",
+         "hWe","hWu","hWi","hWa","hWE","hW", "--",  "--",
+          "ne", "nu", "ni", "na", "nE", "n", "no", "nWa",
+          "Ne", "Nu", "Ni", "Na", "NE", "N", "No", "NWa",
+           "e",  "u",  "i",  "a", "E",  "I",  "o",  "e3",
+          "ke", "ku", "ki", "ka", "kE", "k", "ko",  "--",
+         "kWe","kWu","kWi","kWa","kWE","kW", "--",  "--",
+          "Ke", "Ku", "Ki", "Ka", "KE", "K", "Ko",  "--",
+         "KWe","KWu","KWi","KWa","KWE","KW", "--",  "--",
+          "we", "wu", "wi", "wa", "wE", "w", "wo",  "--",
+          "`e", "`u", "`i", "`a", "`E","`I", "`o",  "--",
+          "ze", "zu", "zi", "za", "zE", "z", "zo", "zWa",
+          "Ze", "Zu", "Zi", "Za", "ZE", "Z", "Zo", "ZWa",
+          "ye", "yu", "yi", "ya", "yE", "y", "yo", "yWa",
+          "de", "du", "di", "da", "dE", "d", "do", "dWa",
+          "De", "Du", "Di", "Da", "DE", "D", "Do", "DWa",
+          "je", "ju", "ji", "ja", "jE", "j", "jo", "jWa",
+          "ge", "gu", "gi", "ga", "gE", "g", "go",  "--",
+         "gWe","gWu","gWi","gWa","gWE","gW", "--",  "--",
+          "Ge", "Gu", "Gi", "Ga", "GE", "G", "Go", "GWa",
+          "Te", "Tu", "Ti", "Ta", "TE", "T", "To", "TWa",
+          "Ce", "Cu", "Ci", "Ca", "CE", "C", "Co", "CWa",
+          "Pe", "Pu", "Pi", "Pa", "PE", "P", "Po", "PWa",
+          "Se", "Su", "Si", "Sa", "SE", "S", "So", "SWa",
+         "`Se","`Su","`Si","`Sa","`SE","`S","`So",  "--",
+          "fe", "fu", "fi", "fa", "fE", "f", "fo", "fWa",
+          "pe", "pu", "pi", "pa", "pE", "p", "po", "pWa",
+         "mYa","rYa","fYa", "--", "--","--", "--",  "--",
+
+         "\" \""," : ","::", ",", ";", "-:", ":-", "`?",":|:",
+          "`1", "`2", "`3", "`4", "`5", "`6", "`7", "`8",  "`9", "`10",
+         "`20","`30","`40","`50","`60","`70","`80","`90","`100", "`10000",
+         "--", "--",  "--",
+  
+         "`qe","`qu","`qi","`qa","`qE","`q","`qo","--", "mWe","bWe","GWe","fWe","pWe","--", "--", "--",
+         "`ke","`ku","`ki","`ka","`kE","`k","`ko","--", "mWi","bWi","GWi","fWi","pWi","--", "--", "--",
+          "Xe", "Xu", "Xi", "Xa", "XE", "X", "Xo","--", "mWE","bWE","GWE","fWE","pWE","--", "--", "--",
+         "`ge","`gu","`gi","`ga","`gE","`g","`go","--", "mW" ,"bW" ,"GW" ,"fW" ,"pW" ,"--", "--", "--", 
+
+         "\\~e","\\~E","\\~a","\\~A","wWe","wWi","wWa","wWE","wW",
+         "''", "`!", ".", "<<", ">>", "?"
+};
+
+
+/* Unicode Fidel Mapping onto the Traditional */
+
+int UniToTraditional[UNITOTAL]=
+  {
+      0,  1,  2,  3,  4,  5,  6,NIL,                 /* he - ho  */
+      8,  9, 10, 11, 12, 13, 14, 15,                 /* le - lWa */
+     16, 17, 18, 19, 20, 21, 22, 23,                 /* He - HWa */
+     24, 25, 26, 27, 28, 29, 30, 34,                 /* me - mWa */
+/*   31,NIL, 33,NIL, 35, 32,NIL,NIL,                 /* mWe- mW  */
+     40, 41, 42, 43, 44, 45, 46, 47,                 /*`se -`sWa */
+     48, 49, 50, 51, 52, 53, 54, 55,                 /* re - rWa */
+     56, 57, 58, 59, 60, 61, 62, 63,                 /* se - sWa */
+     64, 65, 66, 67, 68, 69, 70, 71,                 /* xe - xWa */
+     72, 73, 74, 75, 76, 77, 78,NIL,                 /* qe - qWa */
+     79,NIL, 81, 82, 83, 80,NIL,NIL,                 /* qWe- qW  */
+/*   88, 89, 90, 91, 92, 93, 94,NIL,                 /*`qe - `qo */
+     96, 97, 98, 99,100,101,102,NIL,                 /* Qe - QWa */
+    103,NIL,105,106,107,104,NIL,NIL,                 /* QWe- QW  */
+    112,113,114,115,116,117,118,122,                 /* be - bWa */
+/*  119,NIL,121,122,123,120,NIL,NIL,                 /* bWe- bW  */
+    128,129,130,131,132,133,134,135,                 /* ve - vWa */
+    136,137,138,139,140,141,142,143,                 /* te - tWa */
+    144,145,146,147,148,149,150,151,                 /* ce - cWa */
+    152,153,154,155,156,157,158,NIL,                 /*`he - hWa */
+    159,NIL,161,162,163,160,NIL,NIL,                 /* hWe- hW  */
+    168,169,170,171,172,173,174,175,                 /* ne - nWa */
+    176,177,178,179,180,181,182,183,                 /* Ne - NWa */
+    184,185,186,187,188,189,190,194,                 /*  e -  e3 */
+    192,193,194,195,196,197,198,NIL,                 /* ke - kWa */
+    199,NIL,201,202,203,200,NIL,NIL,                 /* kWe- kW  */
+/*  208,209,210,211,212,213,214,NIL,                 /*`ke - `ko */
+    216,217,218,219,220,221,222,NIL,                 /* Ke - KWa */
+    223,NIL,225,226,227,224,NIL,NIL,                 /* KWe- KW  */
+/*  232,233,234,235,236,237,238,NIL,                 /* Xe - Xo  */
+    240,241,242,243,244,245,246,NIL,                 /* we - wo  */
+/*  247,NIL,249,NIL,251,248,NIL,NIL,                 /* wWe- wW  */
+    256,257,258,259,260,261,262,NIL,                 /* `e - `o  */
+    264,265,266,267,268,269,270,271,                 /* ze - zWa */
+    272,273,274,275,276,277,278,279,                 /* Ze - ZWa */
+    280,281,282,283,284,285,286,287,                 /* ye - yWa */
+    288,289,290,291,292,293,294,295,                 /* de - dWa */
+    296,297,298,299,300,301,302,303,                 /* De - DWa */
+    304,305,306,307,308,309,310,311,                 /* je - jWa */
+    312,313,314,315,316,317,318,NIL,                 /* ge - gWa */
+    319,NIL,321,322,323,320,NIL,NIL,                 /* gWe- gW  */
+/*  328,329,330,331,332,333,334,NIL,                 /*`ge - `go */
+    336,337,338,339,340,341,342,346,                 /* Ge - GWa */
+/*  343,NIL,345,346,347,344,NIL,NIL,                 /* GWe- GW  */
+    352,353,354,355,356,357,358,359,                 /* Te - TWa */
+    360,361,362,363,364,365,366,367,                 /* Ce - CWa */
+    368,369,370,371,372,373,374,375,                 /* Pe - PWa */
+    376,377,378,379,380,381,382,383,                 /* Se - SWa */
+    384,385,386,387,388,389,390,NIL,                 /*`Se - `So */
+    392,393,394,395,396,397,398,402,                 /* fe - fWa */
+/*  399,NIL,401,402,403,400,NIL,NIL,                 /* fWe- fW  */
+    408,409,410,411,412,413,414,418,                 /* pe - pWa */
+/*  415,NIL,417,418,419,416,NIL,NIL,                 /* pWe- pW  */
+    424,425,426,NIL,NIL,NIL,NIL,NIL,                 /* mYa- fYa */
+
+    452,453,458,454,455,457,456,459,460,             /* Punctuate*/
+    432,433,434,436,435,437,438,439,440,441,         /* Numbers  */
+    442,443,444,445,446,447,448,449,450,451,         /* Numbers  */
+    NIL,NIL,NIL,
+
+  
+     88, 89, 90, 91, 92, 93, 94,NIL,                 /*`qe - `qo */
+/*  mWx,bWx,GWx,fWx,pWx,                             */
+     31,119,343,399,415,NIL,NIL,NIL,                 /* mWe- pWe */
+    208,209,210,211,212,213,214,NIL,                 /*`ke - `ko */
+     33,121,345,401,417,NIL,NIL,NIL,                 /* mWi- pWi */
+    232,233,234,235,236,237,238,NIL,                 /* Xe - Xo  */
+     35,123,347,403,419,NIL,NIL,NIL,                 /* mWE- pWE */
+    328,329,330,331,332,333,334,NIL,                 /*`ge - `go */
+     32,120,344,400,416,NIL,NIL,NIL,                 /* mW - pW  */
+
+    467,468,469,470,                                 /* glyphs   */
+    247,249,250,251,248,                             /* wWe- wW  */
+    466,465,464,461,462,463                          /* Misc Punc*/
+  };
+
+
+
+int UniToMod[UNITOTAL] =
+  {
+    176,177,178,179,180,181,182,NIL,                 /* he - ho  */
+      0,  1,  2,  3,  4,  5,  6,  7,                 /* le - lWa */
+      8,  9, 10 ,11 ,12, 13, 14, 15,                 /* He - HWa */ 
+    188,189,190,191,192,193,194,198,                 /* me - mWE */
+     16, 17, 18, 19, 20, 21, 22, 23,                 /*`se -`sWa */
+     24, 25, 26, 27, 28, 29, 30, 31,                 /* re - rWa */
+     32, 33, 34, 35, 36, 37, 38, 39,                 /* se - sWa */
+     40, 41, 42, 43, 44, 45, 46, 47,                 /* xe - xWa */
+    200,201,202,203,204,205,206,NIL,                 /* qe - qWa */
+    207,NIL,209,210,211,208,NIL,NIL,                 /*qWe - qW' */ 
+    212,213,214,215,216,217,218,NIL,                 /* Qe - QWa */
+    219,NIL,221,222,223,220,NIL,NIL,                 /*QWe - QW' */
+    224,225,226,227,228,229,230,234,                 /* be - bWE */
+     48, 49, 50, 51, 52, 53, 54, 55,                 /* ve - vWa */
+     56, 57, 58, 59, 60, 61, 62, 63,                 /* te - tWa */
+     64, 65, 66, 67, 68, 69, 70, 71,                 /* ce - cWa */
+    327,328,329,330,331,332,333,NIL,                 /*`he - `ho */
+    183,NIL,185,186,187,184,NIL,NIL,                 /*hWe - hW' */
+     72, 73, 74, 75, 76, 77, 78, 79,                 /* ne - nWa */
+     80, 81, 82, 83, 84, 85, 86, 87,                 /* Ne - NWa */
+     88, 89, 90, 91, 92, 93, 94, 95,                 /*  e - e3  */
+    236,237,238,239,240,241,242,NIL,                 /* ke - kWa */
+    243,NIL,245,246,247,244,NIL,NIL,                 /*kWe - kW' */
+    248,249,250,251,252,253,254,NIL,                 /* Ke - KWa */
+    255,NIL,257,258,259,256,NIL,NIL,                 /*KWe - KW' */
+    260,261,262,263,264,265,266,NIL,                 /* we - wo  */
+    348,349,350,351,352,353,354,NIL,                 /* `e - `o  */
+     96, 97, 98, 99,100,101,102,103,                 /* ze - zWa */
+    104,105,106,107,108,109,110,111,                 /* Ze - ZWa */
+    112,113,114,115,116,117,118,119,                 /* ye - yWa */
+    120,121,122,123,124,125,126,127,                 /* de - dWa */
+    128,129,130,131,132,133,134,135,                 /* De - DWa */
+    136,137,138,139,140,141,142,143,                 /* je - jWa */
+    272,273,274,275,276,277,278,NIL,                 /* ge - gWa */
+    279,NIL,281,282,283,280,NIL,NIL,                 /*gWe - gW' */
+    284,285,286,287,288,289,290,294,                 /* Ge - GWE */
+    144,145,146,147,148,149,150,151,                 /* Te - TWa */
+    152,153,154,155,156,157,158,159,                 /* Ce - CWa */
+    160,161,162,163,164,165,166,167,                 /* Pe - PWa */
+    168,169,170,171,172,173,174,175,                 /* Se - SWa */
+    362,363,364,365,366,367,368,NIL,                 /*`Se - `So */
+    296,297,298,299,300,301,302,306,                 /* fe - fWa */
+    308,309,310,311,312,313,314,318,                 /* pe - pWE */
+    369,370,371,NIL,NIL,NIL,NIL,NIL,                 /* Extended */
+    403,404,409,405,406,408,407,410,                 /* :  -  `? */
+    411,383,384,385,386,387,388,389,                 /*:|: -  `7 */
+    390,391,392,393,394,395,396,397,                 /* `8 - `60 */
+    398,399,400,401,402,NIL,NIL,NIL,                 /*`70 - `10K*/
+/* extensions */
+    320,321,322,323,324,325,326,NIL,                 /*`qe - `qo */
+    195,231,291,303,315,NIL,NIL,NIL,                 /*mWe - pWe */
+    334,335,336,337,338,339,340,NIL,                 /*`ke - `ko */
+    197,233,293,305,317,NIL,NIL,NIL,                 /*mWi - pWi */
+    341,342,343,344,345,346,347,NIL,                 /* Xe -  Xo */
+    199,235,295,307,319,NIL,NIL,NIL,                 /*mWE - pWE */
+    355,356,357,358,359,360,361,NIL,                 /*`ge - `go */
+    196,232,292,304,316,NIL,NIL,NIL,                 /* mW -  pW */
+/* private use shifted */
+    419,420,421,422,                                 /* glyphs   */
+    267,269,270,271,268,                             /* wWe - wWE*/
+    414,415,416,417,418,419                          /* punctuate*/
+};
+
+
+                                          
+
+#ifndef SUPPORT_JIS
+#define SUPPORT_JIS  1
+
+#ifndef KUTEN_JIS
+#define KUTEN_JIS 1
+typedef struct {int ku; int ten; } KUTEN_MAP;
+#endif  /* KUTEN_JIS */
+
+#define r3  3
+#define r6  6
+#define RA 90
+#define RB 91
+#define RC 92
+#define RD 93
+#define RE 94
+
+/*  #define JISFIDEL  0x7a21
+**  #define JISADJUST 0xa0
+**  #define JISLAST   0x7e65
+*/
+KUTEN_MAP JISFidel[JISSIZE] =
+        {         /* e       u       i      a       E       '       o     W  */
+/* stylized punctuations and glyphs not define in Unicode are prefixed to the
+ * JIS table 
+ */
+
+/* he - ho  */   {RA, 1},{RA, 2},{RA, 3},{RA, 4},{RA, 5},{RA, 6},{RA, 7},{RA,NIL},
+/* le - lWa */   {RA, 9},{RA,10},{RA,11},{RA,12},{RA,13},{RA,14},{RA,15},{RA,16},
+/* He - HWa */   {RA,17},{RA,18},{RA,19},{RA,20},{RA,21},{RA,22},{RA,23},{RA,24},
+/* me - mWa */   {RA,25},{RA,26},{RA,27},{RA,28},{RA,29},{RA,30},{RA,31},{RA,32},
+/*`se -`sWa */   {RA,33},{RA,34},{RA,35},{RA,36},{RA,37},{RA,38},{RA,39},{RA,40},
+/* re - rWa */   {RA,41},{RA,42},{RA,43},{RA,44},{RA,45},{RA,46},{RA,47},{RA,48},
+/* se - sWa */   {RA,49},{RA,50},{RA,51},{RA,52},{RA,53},{RA,54},{RA,55},{RA,56},
+/* xe - xWa */   {RA,57},{RA,58},{RA,59},{RA,60},{RA,61},{RA,62},{RA,63},{RA,64},
+/* qe - qo */    {RA,65},{RA,66},{RA,67},{RA,68},{RA,69},{RA,70},{RA,71},{RA,NIL},
+/*qWe - qW  */   {RA,73},{RA,NIL},{RA,75},{RA,76},{RA,77},{RA,78},{RA,NIL},{RA,NIL},
+/* Qe - Qo */    {RA,81},{RA,82},{RA,83},{RA,84},{RA,85},{RA,86},{RA,87},{RA,NIL},
+/*QWe - QW  */   {RA,89},{RA,NIL},{RA,91},{RA,92},{RA,93},{RA,94},{RB, NIL},{RB,NIL},
+/* be - bWa */   {RB, 3},{RB, 4},{RB, 5},{RB, 6},{RB, 7},{RB, 8},{RB, 9},{RB,10},
+/* ve - vWa */   {RB,11},{RB,12},{RB,13},{RB,14},{RB,15},{RB,16},{RB,17},{RB,18},
+/* te - tWa */   {RB,19},{RB,20},{RB,21},{RB,22},{RB,23},{RB,24},{RB,25},{RB,26},
+/* ce - cWa */   {RB,27},{RB,28},{RB,29},{RB,30},{RB,31},{RB,32},{RB,33},{RB,34},
+/*`he - hWa */   {RB,35},{RB,36},{RB,37},{RB,38},{RB,39},{RB,40},{RB,41},{RB,NIL},
+/*hWe - hW  */   {RB,43},{RB,NIL},{RB,45},{RB,46},{RB,47},{RB,48},{RB,NIL},{RB,NIL},
+/* ne - nWa */   {RB,51},{RB,52},{RB,53},{RB,54},{RB,55},{RB,56},{RB,57},{RB,58},
+/* Ne - NWa */   {RB,59},{RB,60},{RB,61},{RB,62},{RB,63},{RB,64},{RB,65},{RB,66},
+/*  e -  e3 */   {RB,67},{RB,68},{RB,69},{RB,70},{RB,71},{RB,72},{RB,73},{RB,74},
+/* ke - ko */    {RB,75},{RB,76},{RB,77},{RB,78},{RB,79},{RB,80},{RB,81},{RB,NIL},
+/*kWe - kW  */   {RB,83},{RB,NIL},{RB,85},{RB,86},{RB,87},{RB,88},{RB,NIL},{RB,NIL},
+/* Ke - Ko */    {RB,91},{RB,92},{RB,93},{RB,94},{RC, 1},{RC, 2},{RC, 3},{RC,NIL},
+/*KWe - KW  */   {RC, 5},{RC,NIL},{RC, 7},{RC, 8},{RC,9},{RC,10},{RC,NIL},{RC,NIL},
+/* we - wo  */   {RC,13},{RC,14},{RC,15},{RC,16},{RC,17},{RC,18},{RC,19},{RC,NIL},
+/* `e - `o  */   {RC,21},{RC,22},{RC,23},{RC,24},{RC,25},{RC,26},{RC,27},{RC,NIL},
+/* ze - zWa */   {RC,29},{RC,30},{RC,31},{RC,32},{RC,33},{RC,34},{RC,35},{RC,36},
+/* Ze - ZWa */   {RC,37},{RC,38},{RC,39},{RC,40},{RC,41},{RC,42},{RC,42},{RC,44},
+/* ye - yWa */   {RC,45},{RC,46},{RC,47},{RC,48},{RC,49},{RC,50},{RC,51},{RC,52},
+/* de - dWa */   {RC,53},{RC,54},{RC,55},{RC,56},{RC,57},{RC,58},{RC,59},{RC,60},
+/* De - DWa */   {RC,61},{RC,62},{RC,63},{RC,64},{RC,65},{RC,66},{RC,67},{RC,68},
+/* je - jWa */   {RC,69},{RC,70},{RC,71},{RC,72},{RC,73},{RC,74},{RC,75},{RC,76},
+/* ge - go */    {RC,77},{RC,78},{RC,79},{RC,80},{RC,81},{RC,82},{RC,83},{RC,NIL},
+/*gWe - gW  */   {RC,85},{RC,86},{RC,87},{RC,88},{RC,89},{RC,90},{RC,91},{RC,92},
+/* Ge - GWa */   {RC,93},{RC,94},{RD, 1},{RD, 2},{RD, 3},{RD, 4},{RD, 5},{RD, 6},
+/* Te - TWa */   {RD, 7},{RD, 8},{RD, 9},{RD,10},{RD,11},{RD,12},{RD,13},{RD,14},
+/* Ce - CWa */   {RD,15},{RD,16},{RD,17},{RD,18},{RD,19},{RD,20},{RD,21},{RD,22},
+/* Pe - PWa */   {RD,23},{RD,24},{RD,25},{RD,26},{RD,27},{RD,28},{RD,29},{RD,30},
+/* Se - SWa */   {RD,31},{RD,32},{RD,33},{RD,34},{RD,35},{RD,36},{RD,37},{RD,38},
+/*`Se - `So */   {RD,39},{RD,40},{RD,41},{RD,42},{RD,43},{RD,44},{RD,45},{RD,NIL},
+/* fe - fWa */   {RD,47},{RD,48},{RD,49},{RD,50},{RD,51},{RD,52},{RD,53},{RD,54},
+/* pe - pWa */   {RD,55},{RD,56},{RD,57},{RD,58},{RD,59},{RD,60},{RD,61},{RD,62},
+/* mYa- fWa */   {RD,63},{RD,64},{RD,65},{RD,NIL},{RD,NIL},{RD,NIL},{RD,NIL},{RD,NIL},
+/*Punctuation*/  {RD,71},{RD,72},{RD,73},{RD,74},{RD,75},{RD,76},{RD,77},{RD,78},
+/* Numbers  */   {RD,79},{RD,80},{RD,81},{RD,82},{RD,83},{RD,84},{RD,85},{RD,86},
+/* Numbers  */   {RD,87},{RD,88},{RD,89},{RD,90},{RD,91},{RD,92},{RD,93},{RD,94},
+/* Numbers  */   {RE, 1},{RE, 2},{RE, 3},{RE, 4},{RE, 5},{RE,NIL},{RE,NIL},{RE,NIL},
+/* Extended */   {RE, 9},{RE,10},{RE,11},{RE,12},{RE,13},{RE,14},{RE,15},{RE,NIL},
+/* Extended */   {RE,17},{RE,18},{RE,19},{RE,20},{RE,21},{RE,NIL},{RE,NIL},{RE,NIL},
+/* Extended */   {RE,25},{RE,26},{RE,27},{RE,28},{RE,29},{RE,30},{RE,31},{RE,NIL},
+/* Extended */   {RE,33},{RE,34},{RE,35},{RE,36},{RE,37},{RE,NIL},{RE,NIL},{RE,NIL},
+/* Extended */   {RE,41},{RE,42},{RE,43},{RE,44},{RE,45},{RE,46},{RE,47},{RE,NIL},
+/* Extended */   {RE,49},{RE,50},{RE,51},{RE,52},{RE,53},{RE,NIL},{RE,NIL},{RE,NIL},
+/* Extended */   {RE,57},{RE,58},{RE,59},{RE,60},{RE,61},{RE,62},{RE,63},{RE,NIL},
+/* Extended */   {RE,65},{RE,66},{RE,67},{RE,68},{RE,69},{RE,NIL},{RE,NIL},{RE,NIL},
+
+/* Private  */   {RE,NIL},{RE,NIL},{RE,NIL},{RE,NIL},{RE,NIL},{RE,NIL},{RE,NIL},{RE,80},
+/* Private  */   {RE,81},{RE,82},{RE,83},{RE,84},{RE,85},{RE,86},{RE,87},{RE,88},
+/* Private  */   {RE,89},{RE,90},{RE,91},{RE,92},{RE,93},{RE,94}
+
+        };
+#endif  /* SUPPORT_JIS */
+
+
+
+#ifndef SUPPORT_JUNET
+#define SUPPORT_JUNET  1 /*  This is old Junet for Ethiopic that coco uses */
+
+char* JUNETFidel[UNITOTAL]=
+       {
+ /* he  */
+  "$(2!!(B","$(2!\"(B","$(2!#(B","$(2!$(B","$(2!%(B","$(2!&(B","$(2!'(B","$(2!((B",
+ /* le  */
+   "$(2!)(B","$(2!*(B","$(2!+(B","$(2!,(B","$(2!-(B","$(2!.(B","$(2!/(B","$(2!0(B",
+ /* He  */
+   "$(2!1(B","$(2!2(B","$(2!3(B","$(2!4(B","$(2!5(B","$(2!6(B","$(2!7(B","$(2!8(B",
+ /* me  */
+   "$(2!9(B","$(2!:(B","$(2!;(B","$(2!<(B","$(2!=(B","$(2!>(B","$(2!?(B","$(2!@(B",
+ /* `se  */
+   "$(2!A(B","$(2!B(B","$(2!C(B","$(2!D(B","$(2!E(B","$(2!F(B","$(2!G(B","$(2!H(B",
+ /* re  */
+   "$(2!I(B","$(2!J(B","$(2!K(B","$(2!L(B","$(2!M(B","$(2!N(B","$(2!O(B","$(2!P(B",
+ /* se  */
+   "$(2!Q(B","$(2!R(B","$(2!S(B","$(2!T(B","$(2!U(B","$(2!V(B","$(2!W(B","$(2!X(B",
+ /* xe  */
+   "$(2!Y(B","$(2!Z(B","$(2![(B","$(2!\\(B","$(2!](B","$(2!^(B","$(2!_(B","$(2!`(B",
+ /* qe  */
+   "$(2!a(B","$(2!b(B","$(2!c(B","$(2!d(B","$(2!e(B","$(2!f(B","$(2!g(B","$(2!h(B",
+ /* qWe */
+   "$(2!i(B","$(2!j(B","$(2!k(B","$(2!l(B","$(2!m(B","$(2!n(B","$(2!o(B","$(2!p(B",
+ /* Qe  */
+   "$(2!q(B","$(2!r(B","$(2!s(B","$(2!t(B","$(2!u(B","$(2!v(B","$(2!w(B","$(2!x(B",
+ /* QWe */
+   "$(2!y(B","$(2!z(B","$(2!{(B","$(2!|(B","$(2!}(B","$(2!~(B","$(2\"!(B","$(2\"\"(B",
+ /* be  */
+   "$(2\"#(B","$(2\"$(B","$(2\"%(B","$(2\"&(B","$(2\"'(B","$(2\"((B","$(2\")(B","$(2\"*(B",
+ /* ve  */
+   "$(2\"+(B","$(2\",(B","$(2\"-(B","$(2\".(B","$(2\"/(B","$(2\"0(B","$(2\"1(B","$(2\"2(B",
+ /* te  */
+   "$(2\"3(B","$(2\"4(B","$(2\"5(B","$(2\"6(B","$(2\"7(B","$(2\"8(B","$(2\"9(B","$(2\":(B",
+ /* ce  */
+   "$(2\";(B","$(2\"<(B","$(2\"=(B","$(2\">(B","$(2\"?(B","$(2\"@(B","$(2\"A(B","$(2\"B(B",
+ /* `he */
+   "$(2\"C(B","$(2\"D(B","$(2\"E(B","$(2\"F(B","$(2\"G(B","$(2\"H(B","$(2\"I(B","$(2\"J(B",
+ /* `hWe */
+   "$(2\"K(B","$(2\"L(B","$(2\"M(B","$(2\"N(B","$(2\"O(B","$(2\"P(B","$(2\"Q(B","$(2\"R(B",
+ /* ne  */
+   "$(2\"S(B","$(2\"T(B","$(2\"U(B","$(2\"V(B","$(2\"W(B","$(2\"X(B","$(2\"Y(B","$(2\"Z(B",
+ /* Ne  */
+   "$(2\"[(B","$(2\"\\(B","$(2\"](B","$(2\"^(B","$(2\"_(B","$(2\"`(B","$(2\"a(B","$(2\"b(B", 
+ /*  e  */
+   "$(2\"c(B","$(2\"d(B","$(2\"e(B","$(2\"f(B","$(2\"g(B","$(2\"h(B","$(2\"i(B","$(2\"j(B",
+ /* ke  */
+   "$(2\"k(B","$(2\"l(B","$(2\"m(B","$(2\"n(B","$(2\"o(B","$(2\"p(B","$(2\"q(B","$(2\"r(B",
+ /* kWe */
+   "$(2\"s(B","$(2\"t(B","$(2\"u(B","$(2\"v(B","$(2\"w(B","$(2\"x(B","$(2\"y(B","$(2\"z(B",
+ /* Ke  */
+   "$(2\"{(B","$(2\"|(B","$(2\"}(B","$(2\"~(B","$(2#!(B","$(2#\"(B","$(2##(B","$(2#$(B",
+ /* KWe */
+   "$(2#%(B","$(2#&(B","$(2#'(B","$(2#((B","$(2#)(B","$(2#*(B","$(2#+(B","$(2#,(B",
+ /* we  */
+   "$(2#5(B","$(2#6(B","$(2#7(B","$(2#8(B","$(2#9(B","$(2#:(B","$(2#;(B","$(2#<(B",
+ /* `e  */
+   "$(2#-(B","$(2#.(B","$(2#/(B","$(2#0(B","$(2#1(B","$(2#2(B","$(2#3(B","$(2#4(B",
+ /* ze  */
+   "$(2#=(B","$(2#>(B","$(2#?(B","$(2#@(B","$(2#A(B","$(2#B(B","$(2#C(B","$(2#D(B",
+ /* Ze  */
+   "$(2#E(B","$(2#F(B","$(2#G(B","$(2#H(B","$(2#I(B","$(2#J(B","$(2#K(B","$(2#L(B",
+ /* ye  */
+   "$(2#M(B","$(2#N(B","$(2#O(B","$(2#P(B","$(2#Q(B","$(2#R(B","$(2#S(B","$(2#T(B",
+ /* de  */
+   "$(2#U(B","$(2#V(B","$(2#W(B","$(2#X(B","$(2#Y(B","$(2#Z(B","$(2#[(B","$(2#\\(B",
+ /* De  */
+   "$(2#](B","$(2#^(B","$(2#_(B","$(2#`(B","$(2#a(B","$(2#b(B","$(2#c(B","$(2#d(B",
+ /* je  */
+   "$(2#e(B","$(2#f(B","$(2#g(B","$(2#h(B","$(2#i(B","$(2#j(B","$(2#k(B","$(2#l(B",
+ /* ge  */
+   "$(2#m(B","$(2#n(B","$(2#o(B","$(2#p(B","$(2#q(B","$(2#r(B","$(2#s(B","$(2#t(B",
+ /* gWe */
+   "$(2#u(B","$(2#v(B","$(2#w(B","$(2#x(B","$(2#y(B","$(2#z(B","$(2#{(B","$(2#|(B",
+ /* Ge  */
+   "$(2#}(B","$(2#~(B","$(2$!(B","$(2$\"(B","$(2$#(B","$(2$$(B","$(2$%(B","$(2$&(B",
+ /* Te  */
+   "$(2$'(B","$(2$((B","$(2$)(B","$(2$*(B","$(2$+(B","$(2$,(B","$(2$-(B","$(2$.(B",
+ /* Ce  */
+   "$(2$/(B","$(2$0(B","$(2$1(B","$(2$2(B","$(2$3(B","$(2$4(B","$(2$5(B","$(2$6(B",
+ /* Pe  */
+   "$(2$7(B","$(2$8(B","$(2$9(B","$(2$:(B","$(2$;(B","$(2$<(B","$(2$=(B","$(2$>(B",
+ /* Se  */
+   "$(2$?(B","$(2$@(B","$(2$A(B","$(2$B(B","$(2$C(B","$(2$D(B","$(2$E(B","$(2$F(B",
+ /* `Se */
+   "$(2$G(B","$(2$H(B","$(2$I(B","$(2$J(B","$(2$K(B","$(2$L(B","$(2$M(B","$(2$N(B",
+ /* fe  */
+   "$(2$O(B","$(2$P(B","$(2$Q(B","$(2$R(B","$(2$S(B","$(2$T(B","$(2$U(B","$(2$V(B",
+ /* pe  */
+   "$(2$W(B","$(2$X(B","$(2$Y(B","$(2$Z(B","$(2$[(B","$(2$\\(B","$(2$](B","$(2$^(B",
+ /* mYa, rYa, fYa */
+   "$(2$_(B","$(2$`(B","$(2$a(B","$(2$b(B","$(2$c(B","$(2$d(B","$(2$e(B","$(2$f(B",
+ /* 9 Punctuations*/
+   "$(2$g(B","$(2$h(B","$(2$i(B","$(2$j(B","$(2$k(B","$(2$l(B","$(2$m(B","$(2$n(B","$(2$o(B","$(2$p(B",
+ /* `1 - `10  */
+   "$(2$q(B","$(2$r(B","$(2$s(B","$(2$t(B","$(2$u(B","$(2$v(B","$(2$w(B","$(2$x(B","$(2$y(B","$(2$z(B",
+ /* `20 - `10000  */
+   "$(2${(B","$(2$|(B","$(2$}(B","$(2$~(B","$(2%!(B","$(2%\"(B","$(2%#(B","$(2%$(B","$(2%%(B",
+ /* ( 3 Empty ) */
+   "$(2%&(B","$(2%'(B","$(2%((B",
+
+/* End Of Defined Unicode */
+ /* Extended */
+   "$(2%)(B","$(2%*(B","$(2%+(B","$(2%,(B","$(2%-(B","$(2%.(B","$(2%/(B","$(2%0(B",
+ /* Extended */
+   "$(2%1(B","$(2%2(B","$(2%3(B","$(2%4(B","$(2%5(B","$(2%6(B","$(2%7(B","$(2%8(B",
+ /* Extended */
+   "$(2%9(B","$(2%:(B","$(2%;(B","$(2%<(B","$(2%=(B","$(2%>(B","$(2%?(B","$(2%@(B",
+ /* Extended */
+   "$(2%A(B","$(2%B(B","$(2%C(B","$(2%D(B","$(2%E(B","$(2%F(B","$(2%G(B","$(2%H(B",
+ /* Extended */
+   "$(2%I(B","$(2%J(B","$(2%K(B","$(2%L(B","$(2%M(B","$(2%N(B","$(2%O(B","$(2%P(B",
+ /* Extended */
+   "$(2%Q(B","$(2%R(B","$(2%S(B","$(2%T(B","$(2%U(B","$(2%V(B","$(2%W(B","$(2%X(B",
+ /* Extended */
+   "$(2%Y(B","$(2%Z(B","$(2%[(B","$(2%\\(B","$(2%](B","$(2%^(B","$(2%_(B","$(2%`(B",
+ /* Extended */
+   "$(2%a(B","$(2%b(B","$(2%c(B","$(2%d(B","$(2%e(B","$(2%f(B","$(2%g(B","$(2%h(B",
+ /* Private */
+   "$(2%i(B","$(2%j(B","$(2%k(B","$(2%l(B","$(2%m(B","$(2%n(B","$(2%o(B","$(2%p(B",
+ /* Private */
+   "$(2%q(B","$(2%r(B","$(2%s(B","$(2%t(B","$(2%u(B","$(2%v(B","$(2%w(B"
+};
+#endif /* SUPPORT_JUNET */
+
+
+#ifdef SUPPORT_TEX
+
+char* TeXFidel[UNITOTAL] = 
+       {
+          "he", "hu", "hi", "ha", "hE", "h", "ho",  "--",
+          "le", "lu", "li", "la", "lE","lG", "lo", "lWa",
+          "He", "Hu", "Hi", "Ha", "HE","HG", "Ho", "HWa",
+          "me","muG", "mi", "ma", "mE", "m", "mo", "mWa",
+         "sse","ssu","ssi","ssa","ssE","ssG","sso","ssWa",
+          "re", "ru", "ri", "ra", "rE", "r", "ro", "rWa",
+          "se", "su", "si", "sa", "sE", "s", "so", "sWa",
+          "xe", "xu","xiG", "xa", "xE", "x", "xo", "xWa",
+          "qe", "qu", "qi", "qa", "qE", "q", "qo",  "--",
+         "qWe","qWu","qWi","qWa","qWE","qW", "--",  "--",
+          "Qe", "Qu", "Qi", "Qa", "QE", "Q", "Qo",  "--",
+         "QWe","QWu","QWi","QWa","QWE","QW", "--",  "--",
+          "be", "bu", "bi", "ba", "bE","bG", "bo", "bWa",
+          "ve", "vu", "vi", "va", "vE","vG", "vo", "vWa",
+          "te", "tu", "ti", "ta", "tE","tG", "to", "tWa",
+          "ce", "cu", "ci", "ca", "cE","cG", "co", "cWa",
+         "hhe","hhu","hhi","hha","hhE","hh","hho",  "--",
+         "hWe","hWu","hWi","hWa","hWE","hW", "--",  "--",
+          "ne","nuG","niG", "na", "nE", "n", "no", "nWa",
+          "Ne", "Nu", "Ni", "Na", "NE", "N", "No", "NWa",
+          "eG", "uG", "iG", "aG", "EG","IG", "oG", "eaG",
+          "ke", "ku", "ki", "ka", "kE", "k", "ko",  "--",
+         "kWe","kWu","kWi","kWa","kWE","kW", "--",  "--",
+          "Ke", "Ku", "Ki", "Ka", "KE", "K", "Ko",  "--",
+         "KWe","KWu","KWi","KWa","KWE","KW", "--",  "--",
+          "we", "wu", "wi", "wa", "wE", "w", "wo",  "--",
+          "ee", "uu", "ii","aaG", "EE","II", "oo",  "--",
+          "ze", "zu", "zi", "za", "zE", "z", "zo", "zWa",
+          "Ze", "Zu", "Zi", "Za", "ZE", "Z", "Zo", "ZWa",
+          "ye", "yu", "yi", "ya", "yE", "y", "yo", "yWa",
+          "de", "du", "di", "da", "dE","dG","doG", "dWa",
+          "De", "Du", "Di", "Da", "DE", "D", "Do", "DWa",
+          "je", "ju", "ji", "ja", "jE","jG", "jo", "jWa",
+          "ge", "gu", "gi", "ga", "gE", "g", "go",  "--",
+         "gWe","gWu","gWi","gWa","gWE", "gW", "--", "--",
+          "Ge", "Gu", "Gi", "Ga", "GE", "G", "Go", "GWa",
+          "Te", "Tu", "Ti", "Ta", "TE", "T", "To", "TWa",
+          "Ce", "Cu", "Ci", "Ca", "CE", "C", "Co", "CWa",
+          "Pe", "Pu","PiG", "Pa", "PE","PG", "Po", "PWa",
+          "Se", "Su", "Si", "Sa", "SE","SG", "So", "SWa",
+         "SSe","SSu","SSi","SSa","SSE","SS","SSo",  "--",
+          "fe", "fu","fiG", "fa", "fE", "f", "fo", "fWa",
+          "pe", "pu","piG", "pa", "pE", "p", "po", "pWa",
+         "mYa","rYa","fYa", "--", "--","--", "--",  "--",
+
+         "space", "spaceG", "periodG", "commaG", "semicolonG", "colonG", "precolonG", "oldqmarkG", "pbreakG",
+          "andG",  "hulet",    "sost",   "arat",       "amst",  "sadst",     "sabat",      "smnt",   "zeteN",   "asr",
+          "heya", "selasa",    "arba",  "hemsa",       "slsa",   "seba",   "semanya",    "zeTana",    "meto", "asrxi",
+            "--",     "--",      "--",
+  
+         "qqe","qqu","qqi","qqa","qqE", "qq","qqo","--", "mWe","bWe","GWe","fWe","pWe","--", "--", "--",
+         "kke","kku","kki","kka","kkE", "kk","kko","--", "mWi","bWi","GWi","fWi","pWi","--", "--", "--",
+          "Xe", "Xu","XiG", "Xa", "XE",  "X", "Xo","--", "mWE","bWE","GWE","fWE","pWE","--", "--", "--",
+         "gge","ggu","ggi","gga","ggE","ggG","ggo","--", "mW" ,"bW" ,"GW" ,"fW" ,"pW" ,"--", "--", "--", 
+
+         "et","Et","afr","Afr","wWa","wWe","wWi","wWE","wW",
+         "geminateG", "slaq", "dotG", "lquoteG", "rquoteG", "qmarkG"
+};
+#endif  /* SUPPORT_TEX */
+
+
+#ifndef CHARMAP
+typedef struct {unsigned char first; unsigned char next; } CHARMAP;
+#endif /* CHARMAP */
+
+
+#ifndef SUPPORT_AGAFARI
+#define SUPPORT_AGAFARI  1
+
+#define CNULL '\0'
+#define AGA_U  '\xfa'
+#define AGA_IR '\xfb'
+#define AGA_IL '\xfc'
+#define AGA_ER '\xfd'
+#define AGA_EL '\xfe'
+#define AGA_WA '\xff'
+
+CHARMAP AgafariFidel[UNITOTAL] = 
+       {
+/* he */  {'\x2f',CNULL}, {'\x2f',AGA_U}, {'\x3a',AGA_IL}, {'\x3a',CNULL}, {'\x3a',AGA_ER}, {'\x3b',CNULL}, {'\x3c',CNULL}, {CNULL,CNULL},
+/* le */  {'\x3e',CNULL}, {'\x3e',AGA_U}, {'\x3e',AGA_IL}, {'\x3f',CNULL}, {'\x3e',AGA_EL}, {'\x40',CNULL}, {'\x41',CNULL}, {'\x3f',AGA_WA},
+/* He */  {'\x42',CNULL}, {'\x42',AGA_U}, {'\x43',AGA_IL}, {'\x43',CNULL}, {'\x43',AGA_EL}, {'\x44',CNULL}, {'\x45',CNULL}, {'\x43',AGA_WA},
+/* me */  {'\x46',CNULL}, {'\x46',AGA_U}, {'\x47',AGA_IR}, {'\x47',CNULL}, {'\x47',AGA_EL}, {'\x48',CNULL}, {'\x49',CNULL}, {'\x4a',CNULL},
+/*`se */  {'\x4b',CNULL}, {'\x4b',AGA_U}, {'\x4c',AGA_IR}, {'\x4c',CNULL}, {'\x4c',AGA_ER}, {'\x4d',CNULL}, {'\x4e',CNULL}, {'\x4c',AGA_WA},
+/* re */  {'\x4f',CNULL}, {'\x50',CNULL}, {'\x51',CNULL} , {'\x52',CNULL}, {'\x53',CNULL} , {'\x54',CNULL}, {'\x55',CNULL}, {'\x56',CNULL},
+/* se */  {'\x57',CNULL}, {'\x57',AGA_U}, {'\x57',AGA_IL}, {'\x58',CNULL}, {'\x57',AGA_EL}, {'\x59',CNULL}, {'\x5a',CNULL}, {'\x58',AGA_WA},
+/* xe */  {'\x5b',CNULL}, {'\x5b',AGA_U}, {'\x5b',AGA_IL}, {'\x5c',CNULL}, {'\x5b',AGA_EL}, {'\x5d',CNULL}, {'\x5e',CNULL}, {'\x5c',AGA_WA},
+/* qe */  {'\x60',CNULL}, {'\x61',CNULL}, {'\x62',CNULL} , {'\x63',CNULL}, {'\x64',CNULL} , {'\x65',CNULL}, {'\x66',CNULL}, {CNULL, CNULL},
+          {'\x60',CNULL}, {'\x60',CNULL}, {'\x60',CNULL} , {'\x67',CNULL}, {'\x60',CNULL} , {'\x60',CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+/* Qe */  {'\x68',CNULL}, {'\x69',CNULL}, {'\x6a',CNULL} , {'\x6b',CNULL}, {'\x6c',CNULL} , {'\x6d',CNULL}, {'\x6e',CNULL}, {CNULL, CNULL},
+          {'\x68',CNULL}, {'\x68',CNULL}, {'\x68',CNULL} , {'\x6d',CNULL}, {'\x68',CNULL} , {'\x68',CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+/* be */  {'\x6f',CNULL}, {'\x6f',AGA_U}, {'\x6f',AGA_IL}, {'\x70',CNULL}, {'\x6f',AGA_EL}, {'\x71',CNULL}, {'\x72',CNULL}, {'\x70',AGA_WA},
+/* ve */  {'\x73',CNULL}, {'\x73',AGA_U}, {'\x73',AGA_IL}, {'\x74',CNULL}, {'\x73',AGA_EL}, {'\x75',CNULL}, {'\x76',CNULL}, {'\x74',AGA_WA},
+/* te */  {'\x77',CNULL}, {'\x78',CNULL}, {'\x79',CNULL} , {'\x7a',CNULL}, {'\x7b',CNULL} , {'\x7c',CNULL}, {'\x7d',CNULL}, {'\x7e',CNULL},
+/* ce */  {'\x80',CNULL}, {'\x81',CNULL}, {'\x82',CNULL} , {'\x83',CNULL}, {'\x84',CNULL} , {'\x85',CNULL}, {'\x86',CNULL}, {'\x87',CNULL},
+/*`he */  {'\x88',CNULL}, {'\x88',AGA_U}, {'\x88',AGA_IL}, {'\x89',CNULL}, {'\x88',AGA_EL}, {'\x8a',CNULL}, {'\x8b',CNULL}, {CNULL, CNULL},
+          {'\x88',CNULL}, {'\x88',CNULL}, {'\x88',CNULL} , {'\x3d',CNULL}, {'\x88',CNULL} , {'\x88',CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+/* ne */  {'\x8c',CNULL}, {'\x8c',AGA_U}, {'\x8c',AGA_IR}, {'\x8d',CNULL}, {'\x8c',AGA_ER}, {'\x8e',CNULL}, {'\x8f',CNULL}, {'\x90',CNULL},
+/* Ne */  {'\x91',CNULL}, {'\x92',CNULL}, {'\x93',CNULL} , {'\x94',CNULL}, {'\x95',CNULL} , {'\x96',CNULL}, {'\x97',CNULL}, {'\x98',CNULL},
+/* e  */  {'\x99',CNULL}, {'\x99',AGA_U}, {'\x99',AGA_IL}, {'\x9a',CNULL}, {'\x99',AGA_EL}, {'\x9b',CNULL}, {'\x9c',CNULL}, {'\x9d',CNULL},
+/* ke */  {'\x9e',CNULL}, {'\x9e',AGA_U}, {'\x9e',AGA_IL}, {'\x9f',CNULL}, {'\x9e',AGA_EL}, {'\xa1',CNULL}, {'\xa2',CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL} , {CNULL, CNULL}, {CNULL, CNULL} , {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+/* Ke */  {'\xa3',CNULL}, {'\xa3',AGA_U}, {'\xa3',AGA_IL}, {'\xa4',CNULL}, {'\xa3',AGA_EL}, {'\xa5',CNULL}, {'\xa6',CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL} , {CNULL, CNULL}, {CNULL, CNULL} , {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+/* we */  {'\xac',CNULL}, {'\xac',AGA_U}, {'\xad',CNULL} , {'\xae',CNULL}, {'\xaf',CNULL} , {'\xac',AGA_U}, {'\xb0',CNULL}, {CNULL, CNULL},
+/* `e */  {'\xa7',CNULL}, {'\xa7',AGA_U}, {'\xa8',AGA_IL}, {'\xa8',CNULL}, {'\xa8',AGA_EL}, {'\xa9',CNULL}, {'\xaa',CNULL}, {CNULL, CNULL},
+/* ze */  {'\xb1',CNULL}, {'\xb1',AGA_U}, {'\xb1',AGA_IL}, {'\xb2',CNULL}, {'\xb1',AGA_EL}, {'\xb3',CNULL}, {'\xb4',CNULL}, {'\xb2',AGA_WA},
+/* Ze */  {'\xb5',CNULL}, {'\xb6',CNULL}, {'\xb7',CNULL} , {'\xb8',CNULL}, {'\xb9',CNULL} , {'\xba',CNULL}, {'\xbc',CNULL}, {'\xb8',AGA_WA},
+/* ye */  {'\xbd',CNULL}, {'\xbd',AGA_U}, {'\xbe',CNULL} , {'\xbf',CNULL}, {'\xc0',CNULL} , {'\xc1',CNULL}, {'\xc2',CNULL}, {'\xbd',AGA_WA},
+/* de */  {'\xc3',CNULL}, {'\xc4',AGA_U}, {'\xc4',AGA_IL}, {'\xc4',CNULL}, {'\xc5',CNULL} , {'\xc6',CNULL}, {'\xc7',CNULL}, {'\xc4',AGA_WA},
+/* De */  {'\xc3',CNULL}, {'\xc4',AGA_U}, {'\xc4',AGA_IL}, {'\xc4',CNULL}, {'\xc5',CNULL} , {'\xc6',CNULL}, {'\xc7',CNULL}, {'\xc4',AGA_WA},
+/* je */  {'\xc8',CNULL}, {'\xc9',AGA_U}, {'\xc9',AGA_IR}, {'\xc9',CNULL}, {'\xca',CNULL} , {'\xcb',CNULL}, {'\xcc',CNULL}, {'\xcd',CNULL},
+/* ge */  {'\xce',CNULL}, {'\xce',AGA_U}, {'\xce',AGA_IR}, {'\xcf',CNULL}, {'\xce',AGA_EL}, {'\xd0',CNULL}, {'\xd1',CNULL}, {CNULL, CNULL},
+          {'\xce',CNULL}, {CNULL, CNULL}, {'\xce',CNULL} , {'\xd2',CNULL}, {'\xce',CNULL} , {'\xce',CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+/* Ge */  {'\xce',CNULL}, {'\xce',AGA_U}, {'\xce',AGA_IL}, {'\xcf',CNULL}, {'\xce',AGA_EL}, {'\xd0',CNULL}, {'\xd1',CNULL}, {'\xd2',CNULL},
+/* Te */  {'\xd3',CNULL}, {'\xd3',AGA_U}, {'\xd3',AGA_IL}, {'\xd4',CNULL}, {'\xd3',AGA_EL}, {'\xd5',CNULL}, {'\xd6',CNULL}, {'\xd4',AGA_WA},
+/* Ce */  {'\xd7',CNULL}, {'\xd8',CNULL}, {'\xd9',CNULL} , {'\xda',CNULL}, {'\xdb',CNULL} , {'\xdc',CNULL}, {'\xdd',CNULL}, {'\xde',CNULL},
+/* Pe */  {'\xdf',CNULL}, {'\xdf',AGA_U}, {'\xdf',AGA_IL}, {'\xe0',CNULL}, {'\xdf',AGA_EL}, {'\xe1',CNULL}, {'\xe2',CNULL}, {'\xe0',AGA_WA},
+/* Se */  {'\xe7',CNULL}, {'\xe7',AGA_U}, {'\xe8',AGA_IL}, {'\xe8',CNULL}, {'\xe7',AGA_EL}, {'\xe9',CNULL}, {'\xea',CNULL}, {'\xe8',AGA_WA},
+/*`Se */  {'\xe3',CNULL}, {'\xe3',AGA_U}, {'\xe4',AGA_IL}, {'\xe4',CNULL}, {'\xe4',AGA_EL}, {'\xe5',CNULL}, {'\xe6',CNULL}, {CNULL, CNULL},
+/* fe */  {'\xeb',CNULL}, {'\xec',CNULL}, {'\xed',CNULL} , {'\xee',CNULL}, {'\xef',CNULL} , {'\xf0',CNULL}, {'\xf1',CNULL}, {'\xf2',CNULL},
+/* pe */  {'\xf3',CNULL}, {'\xf4',CNULL}, {'\xf5',CNULL} , {'\xf6',CNULL}, {'\xf7',CNULL} , {'\xf8',CNULL}, {'\xf9',CNULL}, {'\xf3',AGA_WA},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL} , {CNULL, CNULL}, {CNULL, CNULL} , {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+ 
+          {CNULL, CNULL}, {CNULL, CNULL}, {'\x23',CNULL}, {'\x22',CNULL}, {'\x21',CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {'?', CNULL}, {CNULL, CNULL}, 
+
+
+          {'\x30',CNULL}, {'\x31',CNULL}, {'\x32',CNULL}, {'\x33',CNULL}, {'\x34',CNULL}, {'\x35',CNULL}, {'\x36',CNULL}, {'\x37',CNULL}, {'\x38',CNULL}, {'\x25',CNULL}, 
+          {'\x26',CNULL}, {'\x27',CNULL}, {'\x28',CNULL}, {'\x29',CNULL}, {'\x2a',CNULL}, {'\x2b',CNULL}, {'\x2c',CNULL}, {'\x2d',CNULL}, {'\x2e',CNULL}, {'\x2f',CNULL}, 
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, 
+
+  
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {'!', CNULL}, {'\x24',CNULL}, {'\xab',CNULL}, {'\xbb',CNULL}, {'?', CNULL}
+};
+#endif  /* SUPPORT_AGAFARI */
+
+
+#ifndef SUPPORT_FEEDEL
+#define SUPPORT_FEEDEL  1
+
+#define CNULL '\0'
+#define FDL_U  '\x2e'
+#define FDL_Ux '\xb3'
+#define FDL_I  '\x3e'
+#define FDL_Ix '\xf9'
+#define FDL_E  '\x3f'
+#define FDL_Ex '\xc0'
+#define FDL_WE '\xd6'
+#define FDL_WA '\x5f'
+#define FDL_WAx '\xd0'
+#define FDL_W  '\x23'
+#define FDL_Wx '\x8b'
+#define FDL_WI '\x8a'
+#define FDL_S  '\x9d'  /* sads mark as in 'b'    */
+#define FDL_B  '\x99'  /* butterfly, nicest of 3, 99, 9b, d1 */
+
+CHARMAP FeedelFidel[UNITOTAL] = 
+       {
+/* he */  {'\x79',CNULL}, {'\x79',FDL_U}, {'\xb4',FDL_Ix},{'\xb4',CNULL}, {'\xff',CNULL}, {'\x59',CNULL}, {'\xe7',CNULL}, {CNULL,CNULL},
+/* le */  {'\x73',CNULL}, {'\x73',FDL_U}, {'\x73',FDL_I}, {'\xa7',CNULL}, {'\x73',FDL_E}, {'\x53',CNULL}, {'\x73',FDL_WE},{'\xa7',FDL_WA},
+/* He */  {'\x61',CNULL}, {'\x61',FDL_U}, {'\x61',FDL_I}, {'\x8c',CNULL}, {'\x61',FDL_E}, {'\x41',CNULL}, {'\x81',CNULL}, {'\x8c',FDL_WA},
+/* me */  {'\x65',CNULL}, {'\x65',FDL_U}, {'\xab',FDL_I}, {'\xab',CNULL}, {'\xab',FDL_E}, {'\x45',CNULL}, {'\xe4',CNULL}, {'\xab',FDL_WA},
+/*`se */  {'\x63',CNULL}, {'\x63',FDL_U}, {'\x8d',FDL_I}, {'\x8d',CNULL}, {'\x8d',FDL_E}, {'\x43',CNULL}, {'\x82',CNULL}, {'\x8d',FDL_WA},
+/* re */  {'\x69',CNULL}, {'\x4b',CNULL}, {'\x6b',CNULL}, {'\x86',CNULL}, {'\x9e',CNULL}, {'\x49',CNULL}, {'\xe9',CNULL}, {'\x85',CNULL},
+/* se */  {'\x68',CNULL}, {'\x68',FDL_U}, {'\x68',FDL_I}, {'\xfa',CNULL}, {'\x68',FDL_E}, {'\x48',CNULL}, {'\xee',CNULL}, {'\xfa',FDL_WA},
+/* xe */  {'\x64',CNULL}, {'\x64',FDL_U}, {'\x64',FDL_I}, {'\x9a',CNULL}, {'\x64',FDL_E}, {'\x44',CNULL}, {'\xeb',CNULL}, {'\x9a',FDL_WA},
+/* qe */  {'\x6e',CNULL}, {'\x6e',FDL_Ux},{'\x6e',FDL_Ix},{'\x7e',CNULL}, {'\x6e',FDL_Ex},{'\x4e',CNULL}, {'\xf6',CNULL}, {CNULL, CNULL},
+          {'\x84',CNULL}, {CNULL, CNULL}, {'\x6e',FDL_WI},{'\x92',CNULL}, {'\x6e',FDL_Ex},{'\xcc',CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+/* Qe */  {'\x6e',FDL_B}, {'\x6e',FDL_Ux},{'\x6e',FDL_Ix},{'\x7e',CNULL}, {'\x6e',FDL_Ex},{'\x4e',CNULL}, {'\xf6',CNULL}, {CNULL, CNULL},
+          {'\x84',FDL_B}, {CNULL, CNULL}, {'\x6e',FDL_WI},{'\x92',CNULL}, {'\x6e',FDL_Ex},{'\xcc',FDL_B}, {CNULL, CNULL}, {CNULL, CNULL},
+/* be */  {'\x6a',CNULL}, {'\x6a',FDL_U}, {'\x6a',FDL_I}, {'\xc6',CNULL}, {'\x6a',FDL_E}, {'\x4a',CNULL}, {'\xef',CNULL}, {'\xc6',FDL_WA},
+/* ve */  {'\x6a',FDL_B}, {'\x6a',FDL_U}, {'\x6a',FDL_I}, {'\xc6',FDL_B}, {'\x6a',FDL_E}, {'\x4a',FDL_B}, {'\xef',FDL_B}, {'\xc6',FDL_WA},
+/* te */  {'\x75',CNULL}, {'\x75',FDL_Ux},{'\x75',FDL_Ix},{'\xac',CNULL}, {'\x75',FDL_Ex},{'\x55',CNULL}, {'\xe8',CNULL}, {'\x9f',CNULL},
+/* ce */  {'\x5b',CNULL}, {'\x5b',FDL_Ux},{'\x5b',FDL_Ix},{'\xd2',CNULL}, {'\x5b',FDL_Ex},{'\x7b',CNULL}, {'\xd3',CNULL}, {'\x5b',FDL_WA},
+/*`he */  {'\x70',CNULL}, {'\x70',FDL_U}, {'\x70',FDL_I}, {'\xb9',CNULL}, {'\x70',FDL_E}, {'\x50',CNULL}, {'\xb8',CNULL}, {CNULL, CNULL},
+          {'\x70',FDL_WE},{CNULL, CNULL}, {'\x70',FDL_WI},{'\x60',CNULL}, {'\x70',FDL_Ex},{'\x70',FDL_W}, {CNULL, CNULL}, {CNULL, CNULL},
+/* ne */  {'\x6c',CNULL}, {'\x6c',FDL_U}, {'\x6c',FDL_I}, {'\xc2',CNULL}, {'\x6c',FDL_E}, {'\x4c',CNULL}, {'\xf1',CNULL}, {'\xc2',FDL_WA},
+/* Ne */  {'\x27',CNULL}, {'\x27',FDL_U}, {'\x27',FDL_Ix},{'\xbe',CNULL}, {'\x27',FDL_Ex},{'\x22',CNULL}, {'\xae',CNULL}, {'\xbe',FDL_WA},
+/* e  */  {'\x72',CNULL}, {'\x72',FDL_U}, {'\x72',FDL_I}, {'\xa8',CNULL}, {'\x72',FDL_E}, {'\x52',CNULL}, {'\xe5',CNULL}, {'\x89',CNULL},
+/* ke */  {'\x6d',CNULL}, {'\x6d',FDL_U}, {'\x6d',FDL_I}, {'\xb5',CNULL}, {'\x6d',FDL_E}, {'\x4d',CNULL}, {'\xf7',CNULL}, {CNULL, CNULL},
+          {'\x6d',FDL_WE},{CNULL, CNULL}, {'\x6d',FDL_WI},{'\x88',CNULL}, {'\x6d',FDL_Ex},{'\x6d', FDL_W},{CNULL, CNULL}, {CNULL, CNULL},
+/* Ke */  {'\x7a',CNULL}, {'\x7a',FDL_U}, {'\x7a',FDL_I}, {'\xbd',CNULL}, {'\x7a',FDL_E}, {'\x5a',CNULL}, {'\xf3',CNULL}, {CNULL, CNULL},
+          {'\x7a',FDL_WE},{CNULL, CNULL}, {'\x7a',FDL_WI},{'\x9c',CNULL}, {'\x7a',FDL_Ex},{'\x7a', FDL_W},{CNULL, CNULL}, {CNULL, CNULL},
+/* we */  {'\x77',CNULL}, {'\xfd',CNULL}, {'\xb7',FDL_Ix},{'\xb7',CNULL}, {'\xb7',FDL_Ex},{'\x57',CNULL}, {'\xe3',CNULL}, {CNULL, CNULL},
+/* `e */  {'\x30',CNULL}, {'\x30',FDL_U}, {'\xbc',FDL_I}, {'\xbc',CNULL}, {'\xbc',FDL_E}, {'\x29',CNULL}, {'\xe2',CNULL}, {CNULL, CNULL},
+/* ze */  {'\x2c',CNULL}, {'\x2c',FDL_U}, {'\x2c',FDL_I}, {'\xb2',CNULL}, {'\x2c',FDL_E}, {'\x3c',CNULL}, {'\xf8',CNULL}, {'\xb2',FDL_WA},
+/* Ze */  {'\x71',CNULL}, {'\x71',FDL_Ux},{'\x71',FDL_Ix},{'\xcf',CNULL}, {'\x71',FDL_Ex},{'\x51',CNULL}, {'\xce',CNULL}, {'\xcf',FDL_WA},
+/* ye */  {'\x76',CNULL}, {'\x87',CNULL}, {'\x91',CNULL}, {'\xc3',CNULL}, {'\xfc',CNULL}, {'\x56',CNULL}, {'\xd7',CNULL}, {'\x76',FDL_B},
+/* de */  {'\x66',CNULL}, {'\xc4',FDL_U}, {'\xc4',FDL_I}, {'\xc4',CNULL}, {'\x66',FDL_E}, {'\x46',CNULL}, {'\xec',CNULL}, {'\x66',FDL_WA},
+/* De */  {'\x66',CNULL}, {'\xc4',FDL_U}, {'\xc4',FDL_I}, {'\xc4',CNULL}, {'\x66',FDL_E}, {'\x46',CNULL}, {'\xec',CNULL}, {'\x66',FDL_WA},
+/* je */  {'\x67',CNULL}, {'\xa9',FDL_U}, {'\xa9',FDL_I}, {'\xa9',CNULL}, {'\x67',FDL_E}, {'\x47',CNULL}, {'\xed',CNULL}, {'\xa9',FDL_WA},
+/* ge */  {'\x6f',CNULL}, {'\x6f',FDL_U}, {'\x6f',FDL_I}, {'\xbf',CNULL}, {'\x6f',FDL_E}, {'\x4f',CNULL}, {'\xaf',CNULL}, {CNULL, CNULL},
+          {'\x6f',FDL_WE},{CNULL, CNULL}, {'\x6f',FDL_WI},{'\xd9',CNULL}, {'\x6f',FDL_Ex},{'\x6f',FDL_W}, {CNULL, CNULL}, {CNULL, CNULL},
+/* Ge */  {'\x6f',FDL_B}, {'\x6f',FDL_U}, {'\x6f',FDL_I}, {'\xbf',CNULL}, {'\x6f',FDL_E}, {'\x4f',CNULL}, {'\xaf',CNULL}, {CNULL, CNULL},
+/* Te */  {'\x62',CNULL}, {'\x62',FDL_U}, {'\x62',FDL_I}, {'\xba',CNULL}, {'\x62',FDL_E}, {'\x42',CNULL}, {'\xf5',CNULL}, {'\xba',FDL_WA},
+/* Ce */  {'\x78',CNULL}, {'\x78',FDL_U}, {'\x78',FDL_I}, {'\xc5',CNULL}, {'\x98',CNULL}, {'\x58',CNULL}, {'\xf4',CNULL}, {'\xfe',CNULL},
+/* Pe */  {'\x5d',CNULL}, {'\x5d',FDL_U}, {'\x5d',FDL_I}, {'\xd4',CNULL}, {'\x5d',FDL_E}, {'\x7d',CNULL}, {'\xd5',CNULL}, {'\xd4',FDL_WA},
+/* Se */  {'\x5c',CNULL}, {'\x5c',FDL_U}, {'\x5c',FDL_I}, {'\xc7',CNULL}, {'\x5c',FDL_E}, {'\x7c',CNULL}, {'\xc8',CNULL}, {'\xc7',FDL_WA},
+/*`Se */  {'\x3b',CNULL}, {'\x3b',FDL_U}, {'\xc9',FDL_I}, {'\xc9',CNULL}, {'\xc9',FDL_E}, {'\x3a',CNULL}, {'\xf2',CNULL}, {CNULL, CNULL},
+/* fe */  {'\x74',CNULL}, {'\xfb',CNULL}, {'\xf0',CNULL}, {'\xcd',CNULL}, {'\xd8',CNULL}, {'\x54',CNULL}, {'\xe6',CNULL}, {'\xcd',FDL_WA},
+/* pe */  {'\x3d',CNULL}, {'\x3d',FDL_Ux},{'\x3d',FDL_Ix},{'\xad',CNULL}, {'\x3d',FDL_Ex},{'\x2b',CNULL}, {'\xb1',CNULL}, {'\x3d',FDL_WA},
+          {'\x8e',CNULL}, {'\x6b',FDL_B}, {'\xf0', FDL_B},{CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+ 
+          {CNULL, CNULL}, {'\xca', CNULL}, {'\xca','\xca'}, {CNULL, CNULL}, {'\x25', CNULL}, {'\x24', CNULL}, {CNULL, CNULL}, {'\x40', CNULL}, {CNULL, CNULL},
+
+
+          {'\xc1',CNULL}, {'\xaa',CNULL}, {'\xa3',CNULL}, {'\xa2',CNULL}, {'\xb0',CNULL}, {'\xa4',CNULL}, {'\xa6',CNULL}, {'\xa5',CNULL}, {'\xbb',CNULL}, {'\xda',CNULL}, 
+          {'\xdb',CNULL}, {'\xdc',CNULL}, {'\xdd',CNULL}, {'\xde',CNULL}, {'\xdf',CNULL}, {'\xe0',CNULL}, {'\xa1',CNULL}, {'\xe1',CNULL}, {'\xea',CNULL}, {'\xcb',CNULL}, 
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, 
+
+  
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {'\x65',FDL_WE},{'\x6a',FDL_WE},{CNULL, CNULL}, {'\x74',FDL_WE},{'\x3d',FDL_WE},{CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, 
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {'\x65',FDL_WI},{'\x6a',FDL_WI},{CNULL, CNULL}, {'\x74',FDL_WI},{'\x3d',FDL_WI},{CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, 
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {'\x65', FDL_W},{'\x6a',FDL_W}, {CNULL, CNULL}, {'\x74',FDL_W}, {'\x3d',FDL_W}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+
+
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {FDL_WA,CNULL}, {FDL_WE,CNULL}, {FDL_WI,CNULL}, {CNULL, CNULL}, {FDL_W, CNULL},
+          {CNULL, CNULL}, {'!', CNULL}, {'\x90',CNULL}, {'\x93',CNULL}, {'\x94',CNULL}, {'\x40', CNULL}
+};
+#endif  /* SUPPORT_FEEDEL */
+
+
+#ifndef SUPPORT_ALXEthiopian
+#define SUPPORT_ALXEthiopian  1
+
+#define ALX_U  '\x26'
+#define ALX_Ul '\x3e'
+#define ALX_Ux '\x2a'
+#define ALX_Uy '\x83'
+#define ALX_Uz '\x84'
+#define ALX_I  '\x40'
+#define ALX_Ix '\x23'
+#define ALX_Iy '\x5e'
+#define ALX_E  '\x5f'
+#define ALX_Ex '\x85'
+#define ALX_Ey '\x86'
+#define ALX_WA '\xa1'
+#define ALX_WAx '\xa2'
+#define ALX_WAy '\xa3'
+
+CHARMAP ALXEtFidel[UNITOTAL] = 
+       {
+/* he */  {'\x75',CNULL}, {'\x75',ALX_U}, {'\xbe',ALX_I}, {'\xbe',CNULL}, {'\xbe',ALX_Ex},{'\x55',CNULL}, {'\xd2',CNULL}, {CNULL, CNULL},
+/* le */  {'\x6c',CNULL}, {'\x6c',ALX_U}, {'\x6c',ALX_Iy},{'\xae',CNULL}, {'\x6c',ALX_E}, {'\x4c',CNULL}, {'\xc9',CNULL}, {'\xae',ALX_WA},
+/* He */  {'\x68',CNULL}, {'\x68',ALX_U}, {'\x68',ALX_Iy},{'\xbe',CNULL}, {'\xbe',ALX_Ex},{'\x48',CNULL}, {'\xd2',CNULL}, {'\x68',ALX_WA},
+/* me */  {'\x6d',CNULL}, {'\x6d',ALX_U}, {'\xec',ALX_I}, {'\xec',CNULL}, {'\xec',ALX_Ex},{'\x4d',CNULL}, {'\xc0',CNULL}, {'\xec',ALX_WAx},
+/*`se */  {'\x63',CNULL}, {'\x63',ALX_U}, {'\xb5',ALX_I}, {'\xb5',CNULL}, {'\xb5',ALX_Ex},{'\x43',CNULL}, {'\xd4',CNULL}, {'\xb5',ALX_WAx},
+/* re */  {'\x72',CNULL}, {'\xdd',CNULL}, {'\xde',CNULL}, {'\x99',CNULL}, {'\x72',ALX_E}, {'\x52',CNULL}, {'\xc5',CNULL}, {'\xdf',CNULL},
+/* se */  {'\x73',CNULL}, {'\x73',ALX_U}, {'\x73',ALX_Iy},{'\xb1',CNULL}, {'\x73',ALX_E}, {'\x53',CNULL}, {'\xce',CNULL}, {'\xb1',ALX_WA},
+/* xe */  {'\x5d',CNULL}, {'\x5d',ALX_U}, {'\x5d',ALX_Iy},{'\xe1',CNULL}, {'\x5d',ALX_E}, {'\x7d',CNULL}, {'\xe0',CNULL}, {'\xe1',ALX_WA},
+/* qe */  {'\x71',CNULL}, {'\x71',ALX_Ux},{'\x71',ALX_Ix},{'\x9a',CNULL}, {'\x71',ALX_Ey},{'\x51',CNULL}, {'\xd6',CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL ,CNULL}, {'\xe5',CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+/* Qe */  {'\x71',CNULL}, {'\x71',ALX_Ux},{'\x71',ALX_Ix},{'\x9a',CNULL}, {'\x71',ALX_Ey},{'\x51',CNULL}, {'\xd6',CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL ,CNULL}, {'\xe5',CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+/* be */  {'\x62',CNULL}, {'\x62',ALX_U}, {'\x62',ALX_Iy},{'\xb2',CNULL}, {'\x62',ALX_E}, {'\x42',CNULL}, {'\xcf',CNULL}, {'\xb2',ALX_WA},
+/* ve */  {'\x76',CNULL}, {'\x76',ALX_U}, {'\x76',ALX_Iy},{'\x8b',CNULL}, {'\x76',ALX_E}, {'\x56',CNULL}, {'\x8c',CNULL}, {'\x8b',ALX_WA},
+/* te */  {'\x74',CNULL}, {'\x74',ALX_Ul},{'\x74',ALX_Ix},{'\xaa',CNULL}, {'\x74',ALX_Ey},{'\x54',CNULL}, {'\xc4',CNULL}, {'\x74',ALX_WAy},
+/* ce */  {'\x5b',CNULL}, {'\x5b',ALX_Ul},{'\x5b',ALX_Ix},{'\xea',CNULL}, {'\x5b',ALX_Ey},{'\x7b',CNULL}, {'\xc8',CNULL}, {'\x5b',ALX_WAy},
+/*`he */  {'\x75',CNULL}, {'\x75',ALX_U}, {'\xbe',ALX_I}, {'\xb8',CNULL}, {'\xbe',ALX_Ex},{'\x3c',CNULL}, {'\xd2',CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL ,CNULL}, {'\xe7',CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+/* ne */  {'\x6e',CNULL}, {'\x6e',ALX_U}, {'\x6e',ALX_I}, {'\xb3',CNULL}, {'\x6e',ALX_Ex},{'\x4e',CNULL}, {'\xd1',CNULL}, {'\xb3',ALX_WAx},
+/* Ne */  {'\x69',CNULL}, {'\x69',ALX_Ul},{'\x69',ALX_Ix},{'\xbc',CNULL}, {'\x69',ALX_Ey},{'\x49',CNULL}, {'\xda',CNULL}, {'\xbc',ALX_WAy},
+/* e  */  {'\x61',CNULL}, {'\x61',ALX_U}, {'\x61',ALX_Iy},{'\x61',CNULL}, {'\x61',ALX_E}, {'\x41',CNULL}, {'\xc1',CNULL}, {'\x89',CNULL},
+/* ke */  {'\x6b',CNULL}, {'\x6b',ALX_U}, {'\x6b',ALX_I}, {'\xb7',CNULL}, {'\x6b',ALX_E}, {'\x4b',CNULL}, {'\xd7',CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL ,CNULL}, {'\xe8',CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+/* Ke */  {'\x60',CNULL}, {'\x60',ALX_U}, {'\x60',ALX_I}, {'\x94',CNULL}, {'\x60',ALX_E}, {'\x7e',CNULL}, {'\x9c',CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL ,CNULL}, {'\xe8',CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+/* we */  {'\x77',CNULL}, {'\x88',CNULL}, {'\xa7',ALX_Ix},{'\xa7',CNULL}, {'\xa7',ALX_Ey},{'\x57',CNULL}, {'\xbf',CNULL}, {CNULL, CNULL},
+/* `e */  {'\x6f',CNULL}, {'\x6f',ALX_U}, {'\xb9',ALX_I}, {'\xb9',CNULL}, {'\xb9',ALX_Ex}, {'\x4f',CNULL},{'\x8a',CNULL}, {CNULL, CNULL},
+/* ze */  {'\x7a',CNULL}, {'\x7a',ALX_U}, {'\x7a',ALX_Iy},{'\xba',CNULL}, {'\x7a',ALX_E}, {'\x5a',CNULL}, {'\xd8',CNULL}, {'\xba',ALX_WA},
+/* Ze */  {'\x5c',CNULL}, {'\x5c',ALX_Ul},{'\x5c',ALX_Ix},{'\xa6',CNULL}, {'\x5c',ALX_Ey},{'\x7c',CNULL}, {'\xd9',CNULL}, {'\xa6',ALX_WAy},
+/* ye */  {'\x79',CNULL}, {'\x79',ALX_Uz},{'\x87',CNULL}, {'\xb6',CNULL}, {'\xe2',CNULL}, {'\x59',CNULL}, {'\xc7',CNULL}, {CNULL, CNULL}, 
+/* de */  {'\x64',CNULL}, {'\xeb',ALX_U}, {'\xeb',ALX_Iy},{'\xeb',CNULL}, {'\x64',ALX_E}, {'\x44',CNULL}, {'\xcc',CNULL}, {'\x64',ALX_WA},
+/* De */  {'\x64',CNULL}, {'\xeb',ALX_U}, {'\xeb',ALX_Iy},{'\xeb',CNULL}, {'\x64',ALX_E}, {'\x44',CNULL}, {'\xcc',CNULL}, {'\x64',ALX_WA},
+/* je */  {'\x6a',CNULL}, {'\xe9',ALX_U}, {'\xe9',ALX_I}, {'\xe9',CNULL}, {'\x6a',ALX_E}, {'\x4a',CNULL}, {'\xd0',CNULL}, {'\xa9',ALX_WA},
+/* ge */  {'\x67',CNULL}, {'\x67',ALX_U}, {'\x67',ALX_Iy},{'\xac',CNULL}, {'\x67',ALX_E}, {'\x47',CNULL}, {'\xc6',CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL ,CNULL}, {'\xe6',CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+/* Ge */  {'\x67',CNULL}, {'\x67',ALX_U}, {'\x67',ALX_Iy},{'\xac',CNULL}, {'\x67',ALX_E}, {'\x47',CNULL}, {'\xc6',CNULL}, {CNULL, CNULL},
+/* Te */  {'\x65',CNULL}, {'\x65',ALX_U}, {'\x65',ALX_Iy},{'\xbd',CNULL}, {'\x65',ALX_E}, {'\x45',CNULL}, {'\xd5',CNULL}, {'\xbd',ALX_WA},
+/* Ce */  {'\x78',CNULL}, {'\x82',CNULL}, {'\xe3',CNULL}, {'\xb4',CNULL}, {'\xe4',CNULL}, {'\x58',CNULL}, {'\xd3',CNULL}, {'\xb4',ALX_WAx},
+/* Pe */  {'\x2f',CNULL}, {'\x2f',ALX_U}, {'\x2f',ALX_Iy},{'\xad',CNULL}, {'\x2f',ALX_E}, {'\x3f',CNULL}, {'\x98',CNULL}, {'\xad',ALX_WA},
+/* Se */  {'\x3b',CNULL}, {'\x3b',ALX_U}, {'\xa9',ALX_Iy},{'\xa9',CNULL}, {'\xa9',ALX_E}, {'\x3a',CNULL}, {'\xc3',CNULL}, {'\xa9',ALX_WA},
+/*`Se */  {'\x27',CNULL}, {'\x27',ALX_U}, {'\xaf',ALX_I}, {'\xaf',CNULL}, {'\xaf',ALX_Ex},{'\x22',CNULL}, {'\xcb',CNULL}, {CNULL, CNULL}, 
+/* fe */  {'\x66',CNULL}, {'\xdb',CNULL}, {'\xdc',CNULL}, {'\xa8',CNULL}, {'\x66',ALX_E}, {'\x46',CNULL}, {'\xc2',CNULL}, {'\xa8',ALX_WAy},
+/* pe */  {'\x70',CNULL}, {'\x70',ALX_Ul},{'\x70',ALX_Ix},{'\xb0',CNULL}, {'\x70',ALX_Ey},{'\x50',CNULL}, {'\xcd',CNULL}, {'\x70',ALX_WAy},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+ 
+          {CNULL, CNULL}, {'\xa5',CNULL}, {'\xa5','\xa5'},{'\xa4',CNULL}, {'\x95', CNULL},{CNULL, CNULL}, {CNULL, CNULL}, {'\x9b',CNULL}, {CNULL, CNULL},
+
+
+          {'\xed',CNULL}, {'\xee',CNULL}, {'\xef',CNULL}, {'\xf0',CNULL}, {'\xf1',CNULL}, {'\xf2',CNULL}, {'\xf3',CNULL}, {'\xf4',CNULL}, {'\xf5',CNULL}, {'\xf6',CNULL}, 
+          {'\xf7',CNULL}, {'\xf8',CNULL}, {'\xf9',CNULL}, {'\xfa',CNULL}, {'\xfb',CNULL}, {'\xfc',CNULL}, {'\xfd',CNULL}, {'\xfe',CNULL}, {'\xff',CNULL}, {'\x97',CNULL}, 
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, 
+
+  
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+
+
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {ALX_WA,CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {'\x21',CNULL}, {'\x2e',CNULL}, {'\xab',CNULL}, {'\xbb',CNULL}, {'\x9b', CNULL}
+};
+#endif  /* SUPPORT_ALXEthiopian */
+
+
+#ifndef SUPPORT_WASHRA
+#define SUPPORT_WASHRA  1
+
+CHARMAP WashraFidel[UNITOTAL] = 
+       {
+/* he */  {'\x41',CNULL}, {'\x42',CNULL}, {'\x43',CNULL}, {'\x44',CNULL}, {'\x45',CNULL}, {'\x46',CNULL}, {'\x47',CNULL}, {CNULL, CNULL},
+/* le */  {'\x48',CNULL}, {'\x49',CNULL}, {'\x4a',CNULL}, {'\x4b',CNULL}, {'\x4c',CNULL}, {'\x4d',CNULL}, {'\x4e',CNULL}, {CNULL,'\x8b'},
+/* He */  {CNULL,'\x41'}, {CNULL,'\x42'}, {CNULL,'\x43'}, {CNULL,'\x44'}, {CNULL,'\x45'}, {CNULL,'\x46'}, {CNULL,'\x47'}, {CNULL, CNULL},
+/* me */  {'\x4f',CNULL}, {'\x50',CNULL}, {'\x51',CNULL}, {'\x52',CNULL}, {'\x53',CNULL}, {'\x54',CNULL}, {'\x55',CNULL}, {CNULL,'\x8c'},
+/*`se */  {CNULL,'\x63'}, {CNULL,'\x64'}, {CNULL,'\x65'}, {CNULL,'\x66'}, {CNULL,'\x67'}, {CNULL,'\x68'}, {CNULL,'\xc9'}, {CNULL, CNULL},
+/* re */  {'\x56',CNULL}, {'\x57',CNULL}, {'\x58',CNULL}, {'\x59',CNULL}, {'\x5a',CNULL}, {'\x61',CNULL}, {'\x62',CNULL}, {CNULL,'\x8d'},
+/* se */  {'\x63',CNULL}, {'\x64',CNULL}, {'\x65',CNULL}, {'\x66',CNULL}, {'\x67',CNULL}, {'\x68',CNULL}, {'\xc9',CNULL}, {CNULL,'\x8e'},
+/* xe */  {'\x6a',CNULL}, {'\x6b',CNULL}, {'\x6c',CNULL}, {'\x6d',CNULL}, {'\x6e',CNULL}, {'\x6f',CNULL}, {'\x70',CNULL}, {CNULL,'\x8f'},
+/* qe */  {'\x71',CNULL}, {'\x72',CNULL}, {'\x73',CNULL}, {'\x74',CNULL}, {'\x75',CNULL}, {'\x76',CNULL}, {'\x77',CNULL}, {CNULL, CNULL},
+          {CNULL,'\xd5'}, {CNULL, CNULL}, {CNULL,'\xd7'}, {CNULL,'\xd8'}, {CNULL,'\xd9'}, {CNULL,'\xd6'}, {CNULL, CNULL}, {CNULL, CNULL},
+/* Qe */  {CNULL,'\x71'}, {CNULL,'\x72'}, {CNULL,'\x73'}, {CNULL,'\x74'}, {CNULL,'\x75'}, {CNULL,'\x76'}, {CNULL,'\x77'}, {CNULL, CNULL},
+          {CNULL,'\xda'}, {CNULL, CNULL}, {CNULL,'\xdc'}, {CNULL,'\xdd'}, {CNULL,'\xde'}, {CNULL,'\xdb'}, {CNULL, CNULL}, {CNULL, CNULL},
+/* be */  {'\x78',CNULL}, {'\x79',CNULL}, {'\x7a',CNULL}, {'\x80',CNULL}, {'\x81',CNULL}, {'\x82',CNULL}, {'\x83',CNULL}, {CNULL,'\x90'},
+/* ve */  {CNULL,'\x78'}, {CNULL,'\x79'}, {CNULL,'\x7a'}, {CNULL,'\x80'}, {CNULL,'\x81'}, {CNULL,'\x82'}, {CNULL,'\x83'}, {CNULL,'\x90'},
+/* te */  {'\x84',CNULL}, {'\x85',CNULL}, {'\x86',CNULL}, {'\x87',CNULL}, {'\x88',CNULL}, {'\x89',CNULL}, {'\x8a',CNULL}, {CNULL,'\x91'},
+/* ce */  {'\x8b',CNULL}, {'\x8c',CNULL}, {'\x8d',CNULL}, {'\x8e',CNULL}, {'\x8f',CNULL}, {'\x90',CNULL}, {'\x91',CNULL}, {CNULL,'\x92'},
+/*`he */  {CNULL,'\x84'}, {CNULL,'\x85'}, {CNULL,'\x86'}, {CNULL,'\x87'}, {CNULL,'\x88'}, {CNULL,'\x89'}, {CNULL,'\x8a'}, {CNULL, CNULL},
+          {CNULL,'\xdf'}, {CNULL, CNULL}, {CNULL,'\xe1'}, {CNULL,'\xe2'}, {CNULL,'\xe0'}, {CNULL,'\xe3'}, {CNULL, CNULL}, {CNULL, CNULL},
+/* ne */  {'\x92',CNULL}, {'\x93',CNULL}, {'\x94',CNULL}, {'\x95',CNULL}, {'\x96',CNULL}, {'\x97',CNULL}, {'\x98',CNULL}, {CNULL,'\x93'},
+/* Ne */  {'\x99',CNULL}, {'\x9a',CNULL}, {'\x9b',CNULL}, {'\x9c',CNULL}, {'\x9d',CNULL}, {'\x9e',CNULL}, {'\x9f',CNULL}, {CNULL,'\x94'},
+/* e  */  {'\xa1',CNULL}, {'\xa2',CNULL}, {'\xa3',CNULL}, {'\xa4',CNULL}, {'\xa5',CNULL}, {'\xa6',CNULL}, {'\xa7',CNULL}, {CNULL,'\x95'},
+/* ke */  {'\xa8',CNULL}, {'\xa9',CNULL}, {'\xaa',CNULL}, {'\xab',CNULL}, {'\xac',CNULL}, {'\xad',CNULL}, {'\xae',CNULL}, {CNULL, CNULL},
+          {CNULL,'\xcb'}, {CNULL, CNULL}, {CNULL,'\xcd'}, {CNULL,'\xce'}, {CNULL,'\xcc'}, {CNULL,'\xcc'}, {CNULL, CNULL}, {CNULL, CNULL},
+/* Ke */  {'\xfc',CNULL}, {CNULL,'\xa9'}, {CNULL,'\xaa'}, {CNULL,'\xab'}, {CNULL,'\xac'}, {CNULL,'\xad'}, {CNULL,'\xae'}, {CNULL, CNULL},
+          {CNULL,'\xcb'}, {CNULL, CNULL}, {CNULL,'\xcd'}, {CNULL,'\xce'}, {CNULL,'\xcc'}, {CNULL,'\xcc'}, {CNULL, CNULL}, {CNULL, CNULL},
+/* we */  {'\xaf',CNULL}, {'\xb0',CNULL}, {'\xb1',CNULL}, {'\xb2',CNULL}, {'\xb3',CNULL}, {'\xb4',CNULL}, {'\xb5',CNULL}, {CNULL, CNULL},
+/* `e */  {CNULL,'\xa1'}, {CNULL,'\xa2'}, {CNULL,'\xa3'}, {CNULL,'\xa4'}, {CNULL,'\xa5'}, {CNULL,'\xa6'}, {CNULL,'\xa7'}, {CNULL,'\x95'},
+/* ze */  {'\xb6',CNULL}, {'\xb7',CNULL}, {'\xb8',CNULL}, {'\xb9',CNULL}, {'\xba',CNULL}, {'\xbb',CNULL}, {'\xbc',CNULL}, {CNULL,'\x96'},
+/* Ze */  {CNULL,'\xb6'}, {CNULL,'\xb7'}, {CNULL,'\xb8'}, {CNULL,'\xb9'}, {CNULL,'\xba'}, {CNULL,'\xbb'}, {CNULL,'\xbc'}, {CNULL,'\x96'},
+/* ye */  {'\xbd',CNULL}, {'\xbe',CNULL}, {'\xbf',CNULL}, {'\xc0',CNULL}, {'\xc1',CNULL}, {'\xc2',CNULL}, {'\xc3',CNULL}, {CNULL, CNULL},
+/* de */  {'\xc4',CNULL}, {'\xc5',CNULL}, {'\xc6',CNULL}, {'\xc7',CNULL}, {'\xc8',CNULL}, {'\xc9',CNULL}, {'\xca',CNULL}, {CNULL,'\x98'},
+/* De */  {CNULL,'\xc4'}, {CNULL,'\xc5'}, {CNULL,'\xc6'}, {CNULL,'\xc7'}, {CNULL,'\xc8'}, {CNULL,'\xc9'}, {CNULL,'\xca'}, {CNULL,'\x98'},
+/* je */  {'\xcb',CNULL}, {'\xcc',CNULL}, {'\xcd',CNULL}, {'\xce',CNULL}, {'\xcf',CNULL}, {'\xd0',CNULL}, {'\xd1',CNULL}, {CNULL, CNULL},
+/* ge */  {'\xd2',CNULL}, {'\xd3',CNULL}, {'\xd4',CNULL}, {'\xd5',CNULL}, {'\xd6',CNULL}, {'\xd7',CNULL}, {'\xd8',CNULL}, {CNULL, CNULL},
+          {CNULL,'\xd0'}, {CNULL, CNULL}, {CNULL,'\xd2'}, {CNULL,'\xd3'}, {CNULL,'\xd4'}, {CNULL,'\xd3'}, {CNULL, CNULL}, {CNULL, CNULL},
+/* Ge */  {'\xd2',CNULL}, {'\xd3',CNULL}, {'\xd4',CNULL}, {'\xd5',CNULL}, {'\xd6',CNULL}, {'\xd7',CNULL}, {'\xd8',CNULL}, {CNULL, CNULL},
+/* Te */  {'\xd9',CNULL}, {'\xda',CNULL}, {'\xdb',CNULL}, {'\xdc',CNULL}, {'\xdd',CNULL}, {'\xde',CNULL}, {'\xdf',CNULL}, {CNULL,'\x99'},
+/* Ce */  {'\xe0',CNULL}, {'\xe1',CNULL}, {'\xe2',CNULL}, {'\xe3',CNULL}, {'\xe4',CNULL}, {'\xe5',CNULL}, {'\xe6',CNULL}, {CNULL,'\x9a'},
+/* Pe */  {CNULL,'\xf5'}, {CNULL,'\xf6'}, {CNULL,'\xf7'}, {CNULL,'\xf8'}, {CNULL,'\xf9'}, {'\xfd',CNULL}, {CNULL,'\xfb'}, {CNULL, CNULL},
+/* Se */  {CNULL,'\xe7'}, {CNULL,'\xe8'}, {CNULL,'\xe9'}, {CNULL,'\xea'}, {CNULL,'\xeb'}, {CNULL,'\xec'}, {CNULL,'\xed'}, {CNULL,'\x9b'},
+/*`Se */  {'\xe7',CNULL}, {'\xe8',CNULL}, {'\xe9',CNULL}, {'\xea',CNULL}, {'\xeb',CNULL}, {'\xec',CNULL}, {'\xed',CNULL}, {CNULL, CNULL},
+/* fe */  {'\xee',CNULL}, {'\xef',CNULL}, {'\xf0',CNULL}, {'\xf1',CNULL}, {'\xf2',CNULL}, {'\xf3',CNULL}, {'\xf4',CNULL}, {CNULL,'\x9c'},
+/* pe */  {'\xf5',CNULL}, {'\xf6',CNULL}, {'\xf7',CNULL}, {'\xf8',CNULL}, {'\xf9',CNULL}, {'\xfa',CNULL}, {'\xfb',CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+ 
+          {CNULL, CNULL}, {CNULL,'\x22'}, {'\x27',CNULL}, {'\x3a',CNULL}, {'\x3b',CNULL}, {'\x22',CNULL}, {'\x7c',CNULL}, {'\x3f',CNULL}, {CNULL, CNULL},
+
+
+          {CNULL,'\x31'}, {CNULL,'\x32'}, {CNULL,'\x33'}, {CNULL,'\x34'}, {CNULL,'\x35'}, {CNULL,'\x36'}, {CNULL,'\x37'}, {CNULL,'\x38'}, {CNULL,'\x39'}, {CNULL,'\x48'},
+          {CNULL,'\x49'}, {CNULL,'\x4a'}, {CNULL,'\x4b'}, {CNULL,'\x4c'}, {CNULL,'\x4d'}, {CNULL,'\x4e'}, {CNULL,'\x4f'}, {CNULL,'\x50'}, {CNULL,'\x51'}, {CNULL,'\x52'},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, 
+
+  
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+
+
+          {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL, CNULL}, {CNULL,CNULL}, {CNULL,CNULL}, {CNULL,CNULL}, {CNULL, CNULL}, {CNULL, CNULL},
+          {CNULL, CNULL}, {CNULL, CNULL}, {'\x2e',CNULL}, {'\x3c','\x3c'},{'\x3e','\x3e'},{'\x3f',CNULL}
+};
+#endif  /* SUPPORT_WASHRA */
+
+#endif  /* FIDEL_H */

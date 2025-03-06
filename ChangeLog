@@ -1,0 +1,85 @@
+Wed Oct  2 09:21:11 EET 1996 (yacob@padis.gn.apc.org)
+
+* sera2any-0.25
+
+* maps for windows fonts are as well tuned as I can get them...
+
+Tue Oct  1 01:36:02 EET DST 1996 (yacob@padis.gn.apc.org)
+
+* Added digit "1" to all implicit #define statements to make non-ANSI
+  compilers happy.  Thanks to compile error reports from Assefa A. 
+  (ayalew@utsax3.univ.trieste.it).
+
+Sat Sep 28 21:48:34 EET DST 1996 (yacob@padis.gn.apc.org)
+
+* RTF conversion added.
+
+* 2nd arg of fidel_sputc and fidel_sputs changed to type unsigned char.
+
+Fri Sep 27 12:26:25 EET DST 1996 (yacob@padis.gn.apc.org)
+
+* ALXEthiopian and Washra support begin.
+
+Sat Sep 21 10:49:41 EET DST 1996 (yacob@padis.gn.apc.org)
+
+* Syncronized ANSI and non-ANSI C declarations in libeth.h after
+  errors reported by Assefa A. (ayalew@utsax3.univ.trieste.it).
+
+* Feedel support begins, Agafari support more or less satisfactory...
+  ...need to contact ALXEthiopian, Dashen, WashRa...
+
+* minor updates following warning by gcc's lint like option -Wall
+
+Sat Aug 24 08:56:35 EET DST 1996  (yacob@padis.gn.apc.org)
+
+* TERM and INT signal catching added for crash control and 
+  debugging of libeth.
+
+* README.dosio updated for line number changes.
+
+Tue Aug 20 10:17:55 EET DST 1996  (yacob@padis.gn.apc.org)
+
+* ``hard_mode'' renamed ``verbatim'' -this should be more descriptive.
+
+* Corrections made for ``hard_mode'' toggles to work properly.
+  Will continue searching for more elegant solutions for this.
+
+Mon Aug 19 01:20:25 EET DST 1996  (yacob@padis.gn.apc.org)
+
+* Extensive parser corrections made for escapes.
+  Escaping is now more like TeX as it should have been
+  (i.e.  \esc1\esc2 permitted)
+
+* forgotten #ifdef SUPPORT_TEX tags added to driver
+
+Sun Aug 11 21:52:56 EET DST 1996  (yacob@padis.gn.apc.org)
+
+* sera2any-0.24
+
+* TeX output is removed from library and handled in driver.
+  TeX output uses macros and does not involve encoding issues.
+  This removes a nasty bug I never uncovered...
+
+Sun Jul 21 04:19:55 EET DST 1996  (yacob@padis.gn.apc.org)
+
+* Number of nodes in get_fchar.l boosted to 640 for SGU Lex.
+
+* TeX output now uses {\%s} like Mule.  This avoids the problem of
+  TeX eating spaces following \%s.
+
+* Updates to include/fidel.map and lib-src/get_fchar.l for
+  TeX support to match revised Mule TeX fidel-to-sera matrix
+  in ethio-uni2.el.  
+
+* Extended whitespace definitions for lib-src/get_fchar.l
+
+Fri Jun 28 15:01:56 EET DST 1996  Daniel Yacob  (yacob@padis.gn.apc.org)
+
+* sera2any-0.23
+
+* Updates to include/fidel.map, include/fidel.h and lib-src/get_fchar.l
+  for ammendments by ISO committee to UTC-95-055A.
+
+* Use strstr instead of strcmp to get self id from argv[0] 
+
+* ``strip'' added to top level makefile.

@@ -1,0 +1,77 @@
+
+Installation
+------------
+
+If you have downloaded the file sera2any-0.XY.tar.Z by ftp (set in binary 
+transfer mode); enter the 2 command lines as follows :
+
+    zcat sera2any-0.XY.tar.Z | tar -xvf -
+
+(
+  Or in 2 Steps :
+    uncompress sera2any-0.XY.tar.Z
+    tar -xvf sera2any-0.XY.tar
+)
+
+You will find a new subdirectory with the name "sera2any-0.XY" that contains 
+the sera2any source files.  If you have obtained your copy of sera2any through 
+encoded email, you will need to save the email message as a new file name and 
+enter at the window command line :
+
+    uudecode filename
+
+you will then discover a new file has been created with the name 
+"sera2any-0.XY.tar.Z" .  At this point follow the 2 commands given for the ftp
+instructions above.
+
+Read the "README" file for usage instructions.
+
+
+TO COMPILE:  
+
+        % make       - makes everything.
+        % make clean - removes unnecessary files.
+
+
+IF YOU DO NOT HAVE gcc AND flex
+
+You should then have ``cc'' and ``lex''.  You may edit the Makefile 
+in lines 2 and 5 for gcc and flex.
+
+
+DEFAULT LANGUAGE
+
+You may change the default language rules by editing commenting out and
+uncommenting the choices on lines 27-29 of the sera2.c file.  
+Tigrigna rules are the default if no change is made.
+
+
+Installing Man Pages
+---------------------
+
+The files etc/sera.1, etc/sera2any.1 are provided man
+page instructions for Unix systems.  If you can not install the
+man pages into a system man directory.  You may create your own
+man directory by:
+
+   % cd sera2any-0.XY
+   % mkdir man
+   % mkdir man/man1
+   % cp etc/*.1 etc/man1
+   % setenv MANPATH $MANPATH":"$PWD/man
+   % man sera
+   % man sera2any
+
+It is more practical to set your new MANPATH in your .cshrc file
+where the $PWD/man directory in the above is replaced the complete
+path name for your man directory.
+
+
+Libeth And DOS I/O
+------------------
+
+If you expect to go between DOS and Unix regularly you may wish to
+compile libeth to perform DOS text conversions.  DOS I/O is NOT the
+default compilation for libeth as it slows down the transileration
+performance for large files.  Follow the directions in 
+sera2/README.dosio to install for DOS support.
