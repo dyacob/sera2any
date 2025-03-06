@@ -1,10 +1,9 @@
 # Convert SERA Text Into Ethiopic Output Systems
 
 ## NOTE
-*This is a archived work last updated in 1995, it is not expected to
+*This is a archived work last updated in 1996, it is not expected to
  build out-of-the-box.  Abundant and better quality solutions are
- available. The PK in this package are available as TrueType and
- Ethiopic text may not be authored directly in Unicode.*
+ available today.*
 
 
 SERA2ANY 0.25
