@@ -46,7 +46,7 @@ Real Example:
 
 Options Are As Follows:
 
-       -c     Map  ASCII  colon,  ``:'',  to Ge'ez colon (-:) and
+       -c     Map  ASCII  colon,  ":",  to Ge'ez colon (-:) and
               not to the default Ge'ez wordspace (:). Ge'ez  word
               space may now only be given by `: .
 
@@ -79,7 +79,7 @@ Options Are As Follows:
                 -o uni      [Unicode Output]
                 -o jis-html [JIS Output With HTML Filtering]
 
-       -q     Map  ASCII  question  mark,  ``?'',  to Ge'ez 3-Dot
+       -q     Map  ASCII  question  mark,  "?",  to Ge'ez 3-Dot
               question mark (`?) and not  to  the  default  Ge'ez
               stylized question mark (?).  The use of ? and `? in
               SERA text are now reversed.
@@ -87,12 +87,12 @@ Options Are As Follows:
        -rtf   Output in Rich Text Format.  Supported for Agafari,
               ALXEthiopian, Feedel, and Washra fonts currently.
 
-       -s     Map ASCII space, `` '', to Ge'ez wordspace (:).
+       -s     Map ASCII space, " ", to Ge'ez wordspace (:).
 
        -stats system
               Provides a Fidel table with statistical  output  of
-              character occurrences into the files ``fidel.stats''
-              and sorted statistics in ``fidel2.stats''.   System
+              character occurrences into the files "fidel.stats"
+              and sorted statistics in "fidel2.stats".   System
               defaults  as  sera  or  may  be  one of  junet, jis, 
 			  alxet,  agafari,  feedel,  unicode,  or  washra.  
               Appending -html to the system  name  will format the 
@@ -123,8 +123,8 @@ SERA
 Extended documents for The System for Ethiopic Representation in ASCII (SERA)
 by World Wide Web at : 
 
-   http://abyssiniagateway.net/fidel/fidel.html
-   http://abyssiniagateway.net/fidel/sera-faq.html
+	http://abyssiniagateway.net/fidel/fidel.html
+	http://abyssiniagateway.net/fidel/sera-faq.html
 
 
 The file "etc/fidel" gives an outline of the ASCII system.
@@ -144,7 +144,7 @@ Briefly, characters are representation goes like :
      Consonants With 12 forms:
      hWe  hWu/hW'  hWi   hWa   hWE
 
-     *NOTE:  ``a'' may be used in place of ``e'' for the first lone
+     *NOTE:  "a" may be used in place of "e" for the first lone
              vowel ONLY in Amharic text zones.  See INSTALL for
              setting Amharic as a default language.
 
