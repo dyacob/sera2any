@@ -36,12 +36,12 @@ to standard error. Options (below) may be used in combination,
 
 Generic Usage:
 
-   sera2any [options] filein > fileout
+    sera2any [options] filein > fileout
 
 Real Example:
 
-   sera2any -o jis-html -stats -l amh etc/fidel > fidel.html
-   sera2any -o washra-rtf -l amh etc/fidel > fidel.rtf
+    sera2any -o jis-html -stats -l amh etc/fidel > fidel.html
+    sera2any -o washra-rtf -l amh etc/fidel > fidel.rtf
 
 
 Options Are As Follows:
