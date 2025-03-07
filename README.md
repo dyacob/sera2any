@@ -1,7 +1,7 @@
 # Convert SERA Text Into Ethiopic Output Systems
 
 ## NOTE
-*This is a archived work last updated in 1996, it is not expected to
+*This is an archived work last updated in 1996, it is not expected to
  build out-of-the-box.  Abundant and better quality solutions are
  available today.*
 
